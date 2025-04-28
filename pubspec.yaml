@@ -1,0 +1,39 @@
+name: sora
+description: "A new Flutter project."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.7.2
+
+dependencies:
+  auto_route: ^10.0.1
+  bloc: ^9.0.0
+  collection: ^1.19.1
+  cupertino_icons: ^1.0.8
+  equatable: ^2.0.7
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.0
+  freezed_annotation: ^3.0.0
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+  logger: ^2.5.0
+  oxidized: ^6.2.0
+  path: ^1.9.1
+  path_provider: ^2.1.5
+  string_validator: ^1.1.0
+  uuid: ^4.5.1
+
+dev_dependencies:
+  auto_route_generator: ^10.0.1
+  build_runner: ^2.4.15
+  flutter_test:
+    sdk: flutter
+  freezed: ^3.0.6
+  injectable_generator: ^2.7.0
+  very_good_analysis: ^7.0.0
+
+flutter:
+
+  uses-material-design: true

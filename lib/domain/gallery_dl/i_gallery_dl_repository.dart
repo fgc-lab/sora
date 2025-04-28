@@ -1,0 +1,12 @@
+import 'package:oxidized/oxidized.dart';
+import 'package:sora/domain/core/download_info.dart';
+import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
+
+abstract class IGalleryDLRepository {
+  Future<Result<DownloadInfo, GalleryDLFailure>> download(
+    DownloadInfo downloadInfo,
+  );
+  Stream<Result<DownloadInfo, GalleryDLFailure>> batchDownload(
+    List<DownloadInfo> downloadInfos,
+  );
+}

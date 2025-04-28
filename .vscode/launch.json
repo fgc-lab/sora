@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Launch Sora",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+        },
+    ]
+}
