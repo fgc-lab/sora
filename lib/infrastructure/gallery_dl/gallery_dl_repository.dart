@@ -60,6 +60,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
             path.join(homeDir, 'gallery-dl', folder),
           ],
           url,
+          if (url.contains('x.com')) ...['-o', 'tweet-endpoint=restid'],
         ],
         environment: {'HOME': homeDir},
         workingDirectory: homeDir,
