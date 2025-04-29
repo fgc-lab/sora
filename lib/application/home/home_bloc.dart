@@ -163,15 +163,30 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       emit(state.copyWith(downloadInfos: newDownloadInfos));
     });
     on<DownloadFailed>((event, emit) {
-      final newDownloadInfos =
-          state.downloadInfos
-              .map(
-                (info) =>
-                    info.uid == event.failure.downloadInfo.uid
-                        ? event.failure.downloadInfo
-                        : info,
-              )
-              .toList();
+      var newDownloadInfos = state.downloadInfos;
+
+      switch (event.failure) {
+        case InvalidURL(:final DownloadInfo downloadInfo):
+          newDownloadInfos =
+              newDownloadInfos
+                  .map(
+                    (info) =>
+                        info.uid == downloadInfo.uid ? downloadInfo : info,
+                  )
+                  .whereType<DownloadInfo>()
+                  .toList();
+        case Unexpected(:final DownloadInfo? downloadInfo):
+          newDownloadInfos =
+              newDownloadInfos
+                  .map(
+                    (info) =>
+                        info.uid == downloadInfo?.uid ? downloadInfo : info,
+                  )
+                  .whereType<DownloadInfo>()
+                  .toList();
+        case GalleryDLNotFound():
+          return;
+      }
 
       emit(
         state.copyWith(

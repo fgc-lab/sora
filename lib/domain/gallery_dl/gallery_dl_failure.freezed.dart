@@ -15,71 +15,63 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GalleryDLFailure {
 
- DownloadInfo get downloadInfo;
-/// Create a copy of GalleryDLFailure
-/// with the given fields replaced by the non-null parameter values.
-@JsonKey(includeFromJson: false, includeToJson: false)
-@pragma('vm:prefer-inline')
-$GalleryDLFailureCopyWith<GalleryDLFailure> get copyWith => _$GalleryDLFailureCopyWithImpl<GalleryDLFailure>(this as GalleryDLFailure, _$identity);
+
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLFailure&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLFailure);
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,downloadInfo);
+int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GalleryDLFailure(downloadInfo: $downloadInfo)';
+  return 'GalleryDLFailure()';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $GalleryDLFailureCopyWith<$Res>  {
-  factory $GalleryDLFailureCopyWith(GalleryDLFailure value, $Res Function(GalleryDLFailure) _then) = _$GalleryDLFailureCopyWithImpl;
-@useResult
-$Res call({
- DownloadInfo downloadInfo
-});
-
-
-$DownloadInfoCopyWith<$Res> get downloadInfo;
-
+class $GalleryDLFailureCopyWith<$Res>  {
+$GalleryDLFailureCopyWith(GalleryDLFailure _, $Res Function(GalleryDLFailure) __);
 }
+
+
 /// @nodoc
-class _$GalleryDLFailureCopyWithImpl<$Res>
-    implements $GalleryDLFailureCopyWith<$Res> {
-  _$GalleryDLFailureCopyWithImpl(this._self, this._then);
 
-  final GalleryDLFailure _self;
-  final $Res Function(GalleryDLFailure) _then;
 
-/// Create a copy of GalleryDLFailure
-/// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? downloadInfo = null,}) {
-  return _then(_self.copyWith(
-downloadInfo: null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
-as DownloadInfo,
-  ));
-}
-/// Create a copy of GalleryDLFailure
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$DownloadInfoCopyWith<$Res> get downloadInfo {
+class GalleryDLNotFound implements GalleryDLFailure {
+  const GalleryDLNotFound();
   
-  return $DownloadInfoCopyWith<$Res>(_self.downloadInfo, (value) {
-    return _then(_self.copyWith(downloadInfo: value));
-  });
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLNotFound);
 }
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'GalleryDLFailure.galleryDLNotFound()';
 }
+
+
+}
+
+
 
 
 /// @nodoc
@@ -89,11 +81,11 @@ class InvalidURL implements GalleryDLFailure {
   const InvalidURL(this.downloadInfo);
   
 
-@override final  DownloadInfo downloadInfo;
+ final  DownloadInfo downloadInfo;
 
 /// Create a copy of GalleryDLFailure
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $InvalidURLCopyWith<InvalidURL> get copyWith => _$InvalidURLCopyWithImpl<InvalidURL>(this, _$identity);
 
@@ -119,13 +111,13 @@ String toString() {
 /// @nodoc
 abstract mixin class $InvalidURLCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
   factory $InvalidURLCopyWith(InvalidURL value, $Res Function(InvalidURL) _then) = _$InvalidURLCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
  DownloadInfo downloadInfo
 });
 
 
-@override $DownloadInfoCopyWith<$Res> get downloadInfo;
+$DownloadInfoCopyWith<$Res> get downloadInfo;
 
 }
 /// @nodoc
@@ -138,7 +130,7 @@ class _$InvalidURLCopyWithImpl<$Res>
 
 /// Create a copy of GalleryDLFailure
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
   return _then(InvalidURL(
 null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
 as DownloadInfo,
@@ -161,14 +153,14 @@ $DownloadInfoCopyWith<$Res> get downloadInfo {
 
 
 class Unexpected implements GalleryDLFailure {
-  const Unexpected(this.downloadInfo);
+  const Unexpected({this.downloadInfo});
   
 
-@override final  DownloadInfo downloadInfo;
+ final  DownloadInfo? downloadInfo;
 
 /// Create a copy of GalleryDLFailure
 /// with the given fields replaced by the non-null parameter values.
-@override @JsonKey(includeFromJson: false, includeToJson: false)
+@JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
 $UnexpectedCopyWith<Unexpected> get copyWith => _$UnexpectedCopyWithImpl<Unexpected>(this, _$identity);
 
@@ -194,13 +186,13 @@ String toString() {
 /// @nodoc
 abstract mixin class $UnexpectedCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
   factory $UnexpectedCopyWith(Unexpected value, $Res Function(Unexpected) _then) = _$UnexpectedCopyWithImpl;
-@override @useResult
+@useResult
 $Res call({
- DownloadInfo downloadInfo
+ DownloadInfo? downloadInfo
 });
 
 
-@override $DownloadInfoCopyWith<$Res> get downloadInfo;
+$DownloadInfoCopyWith<$Res>? get downloadInfo;
 
 }
 /// @nodoc
@@ -213,10 +205,10 @@ class _$UnexpectedCopyWithImpl<$Res>
 
 /// Create a copy of GalleryDLFailure
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? downloadInfo = freezed,}) {
   return _then(Unexpected(
-null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
-as DownloadInfo,
+downloadInfo: freezed == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
+as DownloadInfo?,
   ));
 }
 
@@ -224,9 +216,12 @@ as DownloadInfo,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$DownloadInfoCopyWith<$Res> get downloadInfo {
-  
-  return $DownloadInfoCopyWith<$Res>(_self.downloadInfo, (value) {
+$DownloadInfoCopyWith<$Res>? get downloadInfo {
+    if (_self.downloadInfo == null) {
+    return null;
+  }
+
+  return $DownloadInfoCopyWith<$Res>(_self.downloadInfo!, (value) {
     return _then(_self.copyWith(downloadInfo: value));
   });
 }

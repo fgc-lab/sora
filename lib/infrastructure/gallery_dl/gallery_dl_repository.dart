@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:injectable/injectable.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:path/path.dart' as path;
+import 'package:process_run/shell.dart';
 import 'package:sora/domain/core/download_info.dart';
 import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/domain/core/non_empty_string.dart';
@@ -11,6 +12,21 @@ import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
 
 @LazySingleton(as: IGalleryDLRepository)
 class GalleryDLRepository implements IGalleryDLRepository {
+  @override
+  Future<Result<Unit, GalleryDLFailure>> checkGalleryDLInstallation() async {
+    try {
+      final galleryDL = await which('gallery-dl');
+
+      if (galleryDL == null) {
+        return const Err(GalleryDLFailure.galleryDLNotFound());
+      }
+
+      return const Ok(unit);
+    } catch (e) {
+      return const Err(GalleryDLFailure.unexpected());
+    }
+  }
+
   @override
   Future<Result<DownloadInfo, GalleryDLFailure>> download(
     DownloadInfo downloadInfo,
@@ -52,7 +68,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
       if (process.exitCode != 0) {
         return Err(
           GalleryDLFailure.unexpected(
-            downloadInfo.copyWith(
+            downloadInfo: downloadInfo.copyWith(
               status: DownloadStatus.failure,
               message: NonEmptyString(process.stderr.toString().trim()),
             ),
@@ -69,7 +85,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
     } catch (e) {
       return Err(
         GalleryDLFailure.unexpected(
-          downloadInfo.copyWith(
+          downloadInfo: downloadInfo.copyWith(
             status: DownloadStatus.failure,
             message: NonEmptyString(e.toString().trim()),
           ),
