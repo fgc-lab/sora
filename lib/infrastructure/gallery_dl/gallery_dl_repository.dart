@@ -20,7 +20,9 @@ class GalleryDLRepository implements IGalleryDLRepository {
       return const Err(GalleryDLFailure.galleryDLNotFound());
       final galleryDL = await which('gallery-dl');
 
-      if (galleryDL == null) {}
+      if (galleryDL == null) {
+        return const Err(GalleryDLFailure.notFound());
+      }
 
       return const Ok(unit);
     } catch (e) {
@@ -116,7 +118,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
         return const Ok(unit);
       }
 
-      return const Err(GalleryDLFailure.unexpected());
+      return const Err(GalleryDLFailure.githubLinkFailedToOpen());
     } catch (e) {
       return const Err(GalleryDLFailure.unexpected());
     }

@@ -65,7 +65,39 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GalleryDLFailure.galleryDLNotFound()';
+  return 'GalleryDLFailure.notFound()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class GalleryDLGithubLinkFailedToOpen implements GalleryDLFailure {
+  const GalleryDLGithubLinkFailedToOpen();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLGithubLinkFailedToOpen);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'GalleryDLFailure.githubLinkFailedToOpen()';
 }
 
 

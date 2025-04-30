@@ -17,7 +17,7 @@ class DefaultButton extends StatelessWidget {
 
   final bool isLoading;
 
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
 
   final Color? color;
 

@@ -5,7 +5,10 @@ part 'gallery_dl_failure.freezed.dart';
 
 @freezed
 sealed class GalleryDLFailure with _$GalleryDLFailure {
-  const factory GalleryDLFailure.galleryDLNotFound() = GalleryDLNotFound;
+  const factory GalleryDLFailure.notFound() = GalleryDLNotFound;
+
+  const factory GalleryDLFailure.githubLinkFailedToOpen() =
+      GalleryDLGithubLinkFailedToOpen;
 
   const factory GalleryDLFailure.galleryDLGithubLinkFailedToOpen() =
       GalleryDLGithubLinkFailedToOpen;

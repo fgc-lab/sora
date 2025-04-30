@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) => getIt<HomeBloc>()..add(const HomeEvent.init()),
-        child: SafeArea(child: HomeLayout()),
+        child: const SafeArea(child: HomeLayout()),
       ),
     );
   }
