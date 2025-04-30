@@ -14,19 +14,25 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:sora/application/dashboard/dashboard_cubit.dart' as _i792;
 import 'package:sora/application/home/home_bloc.dart' as _i201;
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart' as _i1058;
+import 'package:sora/infrastructure/core/drift_injectable_module.dart' as _i759;
 import 'package:sora/infrastructure/gallery_dl/gallery_dl_repository.dart'
     as _i136;
 
 extension GetItInjectableX on _i174.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
+    final iDriftInjectableModule = _$IDriftInjectableModule();
     gh.factory<_i792.DashboardCubit>(() => _i792.DashboardCubit());
+    await gh.lazySingletonAsync<_i759.DriftSoraDatabase>(
+      () => iDriftInjectableModule.drift,
+      preResolve: true,
+    );
     gh.lazySingleton<_i1058.IGalleryDLRepository>(
-      () => _i136.GalleryDLRepository(),
+      () => _i136.GalleryDLRepository(gh<_i759.DriftSoraDatabase>()),
     );
     gh.factory<_i201.HomeBloc>(
       () => _i201.HomeBloc(gh<_i1058.IGalleryDLRepository>()),
@@ -34,3 +40,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$IDriftInjectableModule extends _i759.IDriftInjectableModule {}

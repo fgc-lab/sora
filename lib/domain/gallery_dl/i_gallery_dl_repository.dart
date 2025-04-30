@@ -14,4 +14,12 @@ abstract class IGalleryDLRepository {
   );
 
   Future<Result<Unit, GalleryDLFailure>> launchGithubURL();
+
+  Future<Result<Unit, GalleryDLFailure>> insertDownloadInfo(
+    DownloadInfo downloadInfo,
+  );
+
+  Future<Result<Unit, GalleryDLFailure>> checkForDuplicate(
+    DownloadInfo downloadInfo,
+  );
 }

@@ -17,6 +17,11 @@ class DashboardLayout extends StatelessWidget {
       icon: Icons.home_rounded,
       route: const HomeRoute(),
     ),
+    DashboardItem(
+      title: 'Downloads',
+      icon: Icons.download_rounded,
+      route: const DownloadsRoute(),
+    ),
   ];
 
   @override
@@ -54,20 +59,45 @@ class DashboardLayout extends StatelessWidget {
                                     .asMap()
                                     .entries
                                     .map(
-                                      (item) =>
-                                          state.useListTiles
-                                              ? DashboardListTile(
-                                                item: item.value,
-                                                itemIdx: item.key,
-                                                currentIdx: state.currentIdx,
-                                              )
-                                              : DefaultIconButton(
-                                                icon: item.value.icon,
-                                                onPressed:
-                                                    () => context.router.push(
-                                                      item.value.route,
-                                                    ),
-                                              ),
+                                      (item) => Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: item.key.isOdd ? 10 : 0,
+                                        ),
+                                        child:
+                                            state.useListTiles
+                                                ? DashboardListTile(
+                                                  item: item.value,
+                                                  itemIdx: item.key,
+                                                  currentIdx: state.currentIdx,
+                                                  onPressed:
+                                                      () =>
+                                                          context
+                                                            ..read<
+                                                                  DashboardCubit
+                                                                >()
+                                                                .itemPressed(
+                                                                  item.key,
+                                                                )
+                                                            ..router.push(
+                                                              item.value.route,
+                                                            ),
+                                                )
+                                                : DefaultIconButton(
+                                                  icon: item.value.icon,
+                                                  onPressed:
+                                                      () =>
+                                                          context
+                                                            ..read<
+                                                                  DashboardCubit
+                                                                >()
+                                                                .itemPressed(
+                                                                  item.key,
+                                                                )
+                                                            ..router.push(
+                                                              item.value.route,
+                                                            ),
+                                                ),
+                                      ),
                                     )
                                     .toList(),
                           ),

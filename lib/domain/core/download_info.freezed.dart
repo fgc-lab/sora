@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DownloadInfo {
 
- UniqueID get uid; URL get url; DownloadStatus get status; NonEmptyString? get folder; NonEmptyString? get message;
+ UniqueID get uid; URL get url; DownloadStatus get status; bool get isDuplicate; NonEmptyString? get folder; NonEmptyString? get message;
 /// Create a copy of DownloadInfo
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $DownloadInfoCopyWith<DownloadInfo> get copyWith => _$DownloadInfoCopyWithImpl<D
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadInfo&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.url, url) || other.url == url)&&(identical(other.status, status) || other.status == status)&&(identical(other.folder, folder) || other.folder == folder)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadInfo&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.url, url) || other.url == url)&&(identical(other.status, status) || other.status == status)&&(identical(other.isDuplicate, isDuplicate) || other.isDuplicate == isDuplicate)&&(identical(other.folder, folder) || other.folder == folder)&&(identical(other.message, message) || other.message == message));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,uid,url,status,folder,message);
+int get hashCode => Object.hash(runtimeType,uid,url,status,isDuplicate,folder,message);
 
 @override
 String toString() {
-  return 'DownloadInfo(uid: $uid, url: $url, status: $status, folder: $folder, message: $message)';
+  return 'DownloadInfo(uid: $uid, url: $url, status: $status, isDuplicate: $isDuplicate, folder: $folder, message: $message)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $DownloadInfoCopyWith<$Res>  {
   factory $DownloadInfoCopyWith(DownloadInfo value, $Res Function(DownloadInfo) _then) = _$DownloadInfoCopyWithImpl;
 @useResult
 $Res call({
- UniqueID uid, URL url, DownloadStatus status, NonEmptyString? folder, NonEmptyString? message
+ UniqueID uid, URL url, DownloadStatus status, bool isDuplicate, NonEmptyString? folder, NonEmptyString? message
 });
 
 
@@ -63,12 +63,13 @@ class _$DownloadInfoCopyWithImpl<$Res>
 
 /// Create a copy of DownloadInfo
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? url = null,Object? status = null,Object? folder = freezed,Object? message = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? uid = null,Object? url = null,Object? status = null,Object? isDuplicate = null,Object? folder = freezed,Object? message = freezed,}) {
   return _then(_self.copyWith(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as UniqueID,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as URL,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as DownloadStatus,folder: freezed == folder ? _self.folder : folder // ignore: cast_nullable_to_non_nullable
+as DownloadStatus,isDuplicate: null == isDuplicate ? _self.isDuplicate : isDuplicate // ignore: cast_nullable_to_non_nullable
+as bool,folder: freezed == folder ? _self.folder : folder // ignore: cast_nullable_to_non_nullable
 as NonEmptyString?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as NonEmptyString?,
   ));
@@ -81,12 +82,13 @@ as NonEmptyString?,
 
 
 class _DownloadInfo implements DownloadInfo {
-  const _DownloadInfo({required this.uid, required this.url, required this.status, this.folder, this.message});
+  const _DownloadInfo({required this.uid, required this.url, required this.status, required this.isDuplicate, this.folder, this.message});
   
 
 @override final  UniqueID uid;
 @override final  URL url;
 @override final  DownloadStatus status;
+@override final  bool isDuplicate;
 @override final  NonEmptyString? folder;
 @override final  NonEmptyString? message;
 
@@ -100,16 +102,16 @@ _$DownloadInfoCopyWith<_DownloadInfo> get copyWith => __$DownloadInfoCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadInfo&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.url, url) || other.url == url)&&(identical(other.status, status) || other.status == status)&&(identical(other.folder, folder) || other.folder == folder)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadInfo&&(identical(other.uid, uid) || other.uid == uid)&&(identical(other.url, url) || other.url == url)&&(identical(other.status, status) || other.status == status)&&(identical(other.isDuplicate, isDuplicate) || other.isDuplicate == isDuplicate)&&(identical(other.folder, folder) || other.folder == folder)&&(identical(other.message, message) || other.message == message));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,uid,url,status,folder,message);
+int get hashCode => Object.hash(runtimeType,uid,url,status,isDuplicate,folder,message);
 
 @override
 String toString() {
-  return 'DownloadInfo(uid: $uid, url: $url, status: $status, folder: $folder, message: $message)';
+  return 'DownloadInfo(uid: $uid, url: $url, status: $status, isDuplicate: $isDuplicate, folder: $folder, message: $message)';
 }
 
 
@@ -120,7 +122,7 @@ abstract mixin class _$DownloadInfoCopyWith<$Res> implements $DownloadInfoCopyWi
   factory _$DownloadInfoCopyWith(_DownloadInfo value, $Res Function(_DownloadInfo) _then) = __$DownloadInfoCopyWithImpl;
 @override @useResult
 $Res call({
- UniqueID uid, URL url, DownloadStatus status, NonEmptyString? folder, NonEmptyString? message
+ UniqueID uid, URL url, DownloadStatus status, bool isDuplicate, NonEmptyString? folder, NonEmptyString? message
 });
 
 
@@ -137,12 +139,13 @@ class __$DownloadInfoCopyWithImpl<$Res>
 
 /// Create a copy of DownloadInfo
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? url = null,Object? status = null,Object? folder = freezed,Object? message = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? url = null,Object? status = null,Object? isDuplicate = null,Object? folder = freezed,Object? message = freezed,}) {
   return _then(_DownloadInfo(
 uid: null == uid ? _self.uid : uid // ignore: cast_nullable_to_non_nullable
 as UniqueID,url: null == url ? _self.url : url // ignore: cast_nullable_to_non_nullable
 as URL,status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as DownloadStatus,folder: freezed == folder ? _self.folder : folder // ignore: cast_nullable_to_non_nullable
+as DownloadStatus,isDuplicate: null == isDuplicate ? _self.isDuplicate : isDuplicate // ignore: cast_nullable_to_non_nullable
+as bool,folder: freezed == folder ? _self.folder : folder // ignore: cast_nullable_to_non_nullable
 as NonEmptyString?,message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as NonEmptyString?,
   ));

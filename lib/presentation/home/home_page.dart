@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sora/application/home/home_bloc.dart';
 import 'package:sora/injection.dart';
 import 'package:sora/presentation/home/home_layout.dart';
+import 'package:sora/utils/palette.dart';
 
 @RoutePage()
 class HomePage extends StatelessWidget {
@@ -12,6 +13,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Palette.white,
       body: BlocProvider(
         create: (context) => getIt<HomeBloc>()..add(const HomeEvent.init()),
         child: const SafeArea(child: HomeLayout()),

@@ -85,7 +85,7 @@ class _HomeLayoutState extends State<HomeLayout> {
         );
       },
       child: Padding(
-        padding: const EdgeInsets.all(7.5),
+        padding: const EdgeInsets.only(right: 7.5, top: 7.5, bottom: 7.5),
         child: DecoratedBox(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),

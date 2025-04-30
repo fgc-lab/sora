@@ -109,6 +109,81 @@ String toString() {
 /// @nodoc
 
 
+class DownloadInfoAlreadyExist implements GalleryDLFailure {
+  const DownloadInfoAlreadyExist(this.downloadInfo);
+  
+
+ final  DownloadInfo downloadInfo;
+
+/// Create a copy of GalleryDLFailure
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$DownloadInfoAlreadyExistCopyWith<DownloadInfoAlreadyExist> get copyWith => _$DownloadInfoAlreadyExistCopyWithImpl<DownloadInfoAlreadyExist>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadInfoAlreadyExist&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,downloadInfo);
+
+@override
+String toString() {
+  return 'GalleryDLFailure.alreadyExist(downloadInfo: $downloadInfo)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $DownloadInfoAlreadyExistCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
+  factory $DownloadInfoAlreadyExistCopyWith(DownloadInfoAlreadyExist value, $Res Function(DownloadInfoAlreadyExist) _then) = _$DownloadInfoAlreadyExistCopyWithImpl;
+@useResult
+$Res call({
+ DownloadInfo downloadInfo
+});
+
+
+$DownloadInfoCopyWith<$Res> get downloadInfo;
+
+}
+/// @nodoc
+class _$DownloadInfoAlreadyExistCopyWithImpl<$Res>
+    implements $DownloadInfoAlreadyExistCopyWith<$Res> {
+  _$DownloadInfoAlreadyExistCopyWithImpl(this._self, this._then);
+
+  final DownloadInfoAlreadyExist _self;
+  final $Res Function(DownloadInfoAlreadyExist) _then;
+
+/// Create a copy of GalleryDLFailure
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
+  return _then(DownloadInfoAlreadyExist(
+null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
+as DownloadInfo,
+  ));
+}
+
+/// Create a copy of GalleryDLFailure
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DownloadInfoCopyWith<$Res> get downloadInfo {
+  
+  return $DownloadInfoCopyWith<$Res>(_self.downloadInfo, (value) {
+    return _then(_self.copyWith(downloadInfo: value));
+  });
+}
+}
+
+/// @nodoc
+
+
 class InvalidURL implements GalleryDLFailure {
   const InvalidURL(this.downloadInfo);
   

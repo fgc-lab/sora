@@ -8,6 +8,7 @@ class DashboardListTile extends StatelessWidget {
     required this.item,
     required this.itemIdx,
     required this.currentIdx,
+    required this.onPressed,
     super.key,
   });
 
@@ -16,6 +17,8 @@ class DashboardListTile extends StatelessWidget {
   final int itemIdx;
 
   final int currentIdx;
+
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class DashboardListTile extends StatelessWidget {
           item.icon,
           color: itemIdx == currentIdx ? Palette.white : Palette.black,
         ),
-        onTap: () => context.router.push(item.route),
+        onTap: onPressed,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:drift/drift.dart';
 import 'package:injectable/injectable.dart';
 import 'package:oxidized/oxidized.dart';
 import 'package:path/path.dart' as path;
@@ -9,11 +10,16 @@ import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/domain/core/non_empty_string.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
+import 'package:sora/infrastructure/core/drift_injectable_module.dart';
 import 'package:sora/utils/urls.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @LazySingleton(as: IGalleryDLRepository)
 class GalleryDLRepository implements IGalleryDLRepository {
+  GalleryDLRepository(this._drift);
+
+  final DriftSoraDatabase _drift;
+
   @override
   Future<Result<Unit, GalleryDLFailure>> checkGalleryDLInstallation() async {
     try {
@@ -119,6 +125,58 @@ class GalleryDLRepository implements IGalleryDLRepository {
       }
 
       return const Err(GalleryDLFailure.githubLinkFailedToOpen());
+    } catch (e) {
+      return const Err(GalleryDLFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Result<Unit, GalleryDLFailure>> insertDownloadInfo(
+    DownloadInfo downloadInfo,
+  ) async {
+    try {
+      final url = downloadInfo.url.getOrCrash();
+
+      if (url == null) {
+        return Err(GalleryDLFailure.unexpected(downloadInfo: downloadInfo));
+      }
+
+      final folder = downloadInfo.folder?.getOrCrash();
+
+      await _drift
+          .into(_drift.driftDownloadInfo)
+          .insert(
+            DriftDownloadInfoCompanion.insert(url: url, folder: Value(folder)),
+          );
+
+      return const Ok(unit);
+    } catch (e) {
+      return const Err(GalleryDLFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Result<Unit, GalleryDLFailure>> checkForDuplicate(
+    DownloadInfo downloadInfo,
+  ) async {
+    try {
+      final url = downloadInfo.url.getOrCrash();
+
+      if (url == null) {
+        return Err(GalleryDLFailure.unexpected(downloadInfo: downloadInfo));
+      }
+
+      final result =
+          await (_drift.select(_drift.driftDownloadInfo)
+            ..where((info) => info.url.equals(url))).get();
+
+      if (result.isNotEmpty) {
+        final newDownloadInfo = downloadInfo.copyWith(isDuplicate: true);
+
+        return Err(GalleryDLFailure.alreadyExist(newDownloadInfo));
+      }
+
+      return const Ok(unit);
     } catch (e) {
       return const Err(GalleryDLFailure.unexpected());
     }

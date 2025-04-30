@@ -53,8 +53,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ),
       );
     });
-    on<URLChanged>((event, emit) {
-      final newDownloadInfos =
+    on<URLChanged>((event, emit) async {
+      var newDownloadInfos =
           state.downloadInfos
               .map(
                 (info) =>
@@ -63,6 +63,33 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                         : info,
               )
               .toList();
+
+      emit(state.copyWith(downloadInfos: newDownloadInfos));
+
+      final downloadInfo = state.downloadInfos.singleWhereOrNull(
+        (info) => info.uid == event.uid,
+      );
+
+      if (downloadInfo != null) {
+        (await _galleryDLRepository.checkForDuplicate(downloadInfo)).match(
+          (_) {},
+          (failure) {
+            switch (failure) {
+              case DownloadInfoAlreadyExist(:final downloadInfo):
+                newDownloadInfos =
+                    state.downloadInfos
+                        .map(
+                          (info) => info.uid == event.uid ? downloadInfo : info,
+                        )
+                        .toList();
+
+                emit(state.copyWith(downloadInfos: newDownloadInfos));
+              default:
+                break;
+            }
+          },
+        );
+      }
 
       emit(state.copyWith(downloadInfos: newDownloadInfos));
     });
@@ -164,7 +191,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
       add(const HomeEvent.init());
     });
-    on<DownloadSucceeded>((event, emit) {
+    on<DownloadSucceeded>((event, emit) async {
       final newDownloadInfos =
           state.downloadInfos
               .map(
@@ -176,6 +203,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
               .toList();
 
       emit(state.copyWith(downloadInfos: newDownloadInfos));
+
+      (await _galleryDLRepository.insertDownloadInfo(
+        event.downloadInfo,
+      )).match((_) {}, (failure) {});
     });
     on<DownloadFailed>((event, emit) {
       var newDownloadInfos = state.downloadInfos;
@@ -199,9 +230,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   )
                   .whereType<DownloadInfo>()
                   .toList();
-        case GalleryDLNotFound():
-        case GalleryDLGithubLinkFailedToOpen():
-          return;
+        default:
+          break;
       }
 
       emit(

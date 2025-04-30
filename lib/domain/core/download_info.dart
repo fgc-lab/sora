@@ -12,6 +12,7 @@ sealed class DownloadInfo with _$DownloadInfo {
     required UniqueID uid,
     required URL url,
     required DownloadStatus status,
+    required bool isDuplicate,
     NonEmptyString? folder,
     NonEmptyString? message,
   }) = _DownloadInfo;
@@ -20,5 +21,6 @@ sealed class DownloadInfo with _$DownloadInfo {
     uid: UniqueID(),
     url: URL(''),
     status: DownloadStatus.unknown,
+    isDuplicate: false,
   );
 }
