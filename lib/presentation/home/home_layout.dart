@@ -61,11 +61,18 @@ class _HomeLayoutState extends State<HomeLayout> {
                             context: context,
                             barrierDismissible: false,
                             builder:
-                                (_) => HomeGalleryDLNotFoundDialog(
-                                  onPressed:
-                                      () => context.read<HomeBloc>().add(
-                                        const HomeEvent.galleryDLLinkPressed(),
-                                      ),
+                                (_) => BlocProvider<HomeBloc>.value(
+                                  value: context.read<HomeBloc>(),
+                                  child: HomeGalleryDLNotFoundDialog(
+                                    onLinkPressed:
+                                        () => context.read<HomeBloc>().add(
+                                          const HomeEvent.galleryDLLinkPressed(),
+                                        ),
+                                    onRestartPressed:
+                                        () => context.read<HomeBloc>().add(
+                                          const HomeEvent.init(),
+                                        ),
+                                  ),
                                 ),
                           );
                         default:

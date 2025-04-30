@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DashboardState {
 
- bool get isDrawerExpanded; bool get useListTiles;
+ bool get isDrawerExpanded; bool get useListTiles; int get currentIdx;
 /// Create a copy of DashboardState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $DashboardStateCopyWith<DashboardState> get copyWith => _$DashboardStateCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DashboardState&&(identical(other.isDrawerExpanded, isDrawerExpanded) || other.isDrawerExpanded == isDrawerExpanded)&&(identical(other.useListTiles, useListTiles) || other.useListTiles == useListTiles));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DashboardState&&(identical(other.isDrawerExpanded, isDrawerExpanded) || other.isDrawerExpanded == isDrawerExpanded)&&(identical(other.useListTiles, useListTiles) || other.useListTiles == useListTiles)&&(identical(other.currentIdx, currentIdx) || other.currentIdx == currentIdx));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isDrawerExpanded,useListTiles);
+int get hashCode => Object.hash(runtimeType,isDrawerExpanded,useListTiles,currentIdx);
 
 @override
 String toString() {
-  return 'DashboardState(isDrawerExpanded: $isDrawerExpanded, useListTiles: $useListTiles)';
+  return 'DashboardState(isDrawerExpanded: $isDrawerExpanded, useListTiles: $useListTiles, currentIdx: $currentIdx)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $DashboardStateCopyWith<$Res>  {
   factory $DashboardStateCopyWith(DashboardState value, $Res Function(DashboardState) _then) = _$DashboardStateCopyWithImpl;
 @useResult
 $Res call({
- bool isDrawerExpanded, bool useListTiles
+ bool isDrawerExpanded, bool useListTiles, int currentIdx
 });
 
 
@@ -63,11 +63,12 @@ class _$DashboardStateCopyWithImpl<$Res>
 
 /// Create a copy of DashboardState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? isDrawerExpanded = null,Object? useListTiles = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? isDrawerExpanded = null,Object? useListTiles = null,Object? currentIdx = null,}) {
   return _then(_self.copyWith(
 isDrawerExpanded: null == isDrawerExpanded ? _self.isDrawerExpanded : isDrawerExpanded // ignore: cast_nullable_to_non_nullable
 as bool,useListTiles: null == useListTiles ? _self.useListTiles : useListTiles // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,currentIdx: null == currentIdx ? _self.currentIdx : currentIdx // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -78,11 +79,12 @@ as bool,
 
 
 class _DashboardState implements DashboardState {
-  const _DashboardState({this.isDrawerExpanded = false, this.useListTiles = false});
+  const _DashboardState({this.isDrawerExpanded = false, this.useListTiles = false, this.currentIdx = 0});
   
 
 @override@JsonKey() final  bool isDrawerExpanded;
 @override@JsonKey() final  bool useListTiles;
+@override@JsonKey() final  int currentIdx;
 
 /// Create a copy of DashboardState
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +96,16 @@ _$DashboardStateCopyWith<_DashboardState> get copyWith => __$DashboardStateCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DashboardState&&(identical(other.isDrawerExpanded, isDrawerExpanded) || other.isDrawerExpanded == isDrawerExpanded)&&(identical(other.useListTiles, useListTiles) || other.useListTiles == useListTiles));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DashboardState&&(identical(other.isDrawerExpanded, isDrawerExpanded) || other.isDrawerExpanded == isDrawerExpanded)&&(identical(other.useListTiles, useListTiles) || other.useListTiles == useListTiles)&&(identical(other.currentIdx, currentIdx) || other.currentIdx == currentIdx));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,isDrawerExpanded,useListTiles);
+int get hashCode => Object.hash(runtimeType,isDrawerExpanded,useListTiles,currentIdx);
 
 @override
 String toString() {
-  return 'DashboardState(isDrawerExpanded: $isDrawerExpanded, useListTiles: $useListTiles)';
+  return 'DashboardState(isDrawerExpanded: $isDrawerExpanded, useListTiles: $useListTiles, currentIdx: $currentIdx)';
 }
 
 
@@ -114,7 +116,7 @@ abstract mixin class _$DashboardStateCopyWith<$Res> implements $DashboardStateCo
   factory _$DashboardStateCopyWith(_DashboardState value, $Res Function(_DashboardState) _then) = __$DashboardStateCopyWithImpl;
 @override @useResult
 $Res call({
- bool isDrawerExpanded, bool useListTiles
+ bool isDrawerExpanded, bool useListTiles, int currentIdx
 });
 
 
@@ -131,11 +133,12 @@ class __$DashboardStateCopyWithImpl<$Res>
 
 /// Create a copy of DashboardState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? isDrawerExpanded = null,Object? useListTiles = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? isDrawerExpanded = null,Object? useListTiles = null,Object? currentIdx = null,}) {
   return _then(_DashboardState(
 isDrawerExpanded: null == isDrawerExpanded ? _self.isDrawerExpanded : isDrawerExpanded // ignore: cast_nullable_to_non_nullable
 as bool,useListTiles: null == useListTiles ? _self.useListTiles : useListTiles // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,currentIdx: null == currentIdx ? _self.currentIdx : currentIdx // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 

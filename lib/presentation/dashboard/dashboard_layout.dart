@@ -2,12 +2,22 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sora/application/dashboard/dashboard_cubit.dart';
+import 'package:sora/domain/dashboard/dashboard_item.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
+import 'package:sora/presentation/dashboard/widgets/dashboard_list_tile.dart';
 import 'package:sora/presentation/routes/router.gr.dart';
 import 'package:sora/utils/palette.dart';
 
 class DashboardLayout extends StatelessWidget {
-  const DashboardLayout({super.key});
+  DashboardLayout({super.key});
+
+  final items = [
+    DashboardItem(
+      title: 'Home',
+      icon: Icons.home_rounded,
+      route: const HomeRoute(),
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -39,34 +49,27 @@ class DashboardLayout extends StatelessWidget {
                         children: [
                           Column(
                             mainAxisSize: MainAxisSize.min,
-                            children: [
-                              if (state.useListTiles)
-                                ListTile(
-                                  onTap:
-                                      () => context.router.push(
-                                        const HomeRoute(),
-                                      ),
-                                  leading: Icon(
-                                    Icons.home_rounded,
-                                    color: Palette.black,
-                                  ),
-                                  title: const Text('Home'),
-                                )
-                              else
-                                DefaultIconButton(
-                                  onPressed:
-                                      () => context.router.push(
-                                        const HomeRoute(),
-                                      ),
-                                  icon: Icons.home_rounded,
-                                ),
-                              // IconButton.filled(
-                              //   onPressed:
-                              //       () =>
-                              //           context.router.push(const LibraryRoute()),
-                              //   icon: Icon(Icons.shelves, color: Palette.black),
-                              // ),
-                            ],
+                            children:
+                                items
+                                    .asMap()
+                                    .entries
+                                    .map(
+                                      (item) =>
+                                          state.useListTiles
+                                              ? DashboardListTile(
+                                                item: item.value,
+                                                itemIdx: item.key,
+                                                currentIdx: state.currentIdx,
+                                              )
+                                              : DefaultIconButton(
+                                                icon: item.value.icon,
+                                                onPressed:
+                                                    () => context.router.push(
+                                                      item.value.route,
+                                                    ),
+                                              ),
+                                    )
+                                    .toList(),
                           ),
                           Row(
                             mainAxisAlignment:

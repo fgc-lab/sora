@@ -26,4 +26,8 @@ class DashboardCubit extends Cubit<DashboardState> {
       }
     }
   }
+
+  void onItemPressed(int index) {
+    emit(state.copyWith(currentIdx: index));
+  }
 }

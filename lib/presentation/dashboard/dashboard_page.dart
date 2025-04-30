@@ -14,7 +14,7 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) => getIt<DashboardCubit>(),
-        child: const SafeArea(child: DashboardLayout()),
+        child: SafeArea(child: DashboardLayout()),
       ),
     );
   }
