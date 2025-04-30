@@ -65,7 +65,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GalleryDLFailure.galleryDLNotFound()';
+  return 'GalleryDLFailure.notFound()';
 }
 
 
@@ -97,7 +97,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GalleryDLFailure.galleryDLGithubLinkFailedToOpen()';
+  return 'GalleryDLFailure.githubLinkFailedToOpen()';
 }
 
 
