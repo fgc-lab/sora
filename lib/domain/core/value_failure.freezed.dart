@@ -76,8 +76,8 @@ as T,
 /// @nodoc
 
 
-class Empty<T> implements ValueFailure<T> {
-  const Empty(this.failedValue);
+class _Empty<T> implements ValueFailure<T> {
+  const _Empty(this.failedValue);
   
 
 @override final  T failedValue;
@@ -86,13 +86,13 @@ class Empty<T> implements ValueFailure<T> {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$EmptyCopyWith<T, Empty<T>> get copyWith => _$EmptyCopyWithImpl<T, Empty<T>>(this, _$identity);
+_$EmptyCopyWith<T, _Empty<T>> get copyWith => __$EmptyCopyWithImpl<T, _Empty<T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Empty<T>&&const DeepCollectionEquality().equals(other.failedValue, failedValue));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Empty<T>&&const DeepCollectionEquality().equals(other.failedValue, failedValue));
 }
 
 
@@ -108,8 +108,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $EmptyCopyWith<T,$Res> implements $ValueFailureCopyWith<T, $Res> {
-  factory $EmptyCopyWith(Empty<T> value, $Res Function(Empty<T>) _then) = _$EmptyCopyWithImpl;
+abstract mixin class _$EmptyCopyWith<T,$Res> implements $ValueFailureCopyWith<T, $Res> {
+  factory _$EmptyCopyWith(_Empty<T> value, $Res Function(_Empty<T>) _then) = __$EmptyCopyWithImpl;
 @override @useResult
 $Res call({
  T failedValue
@@ -120,17 +120,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$EmptyCopyWithImpl<T,$Res>
-    implements $EmptyCopyWith<T, $Res> {
-  _$EmptyCopyWithImpl(this._self, this._then);
+class __$EmptyCopyWithImpl<T,$Res>
+    implements _$EmptyCopyWith<T, $Res> {
+  __$EmptyCopyWithImpl(this._self, this._then);
 
-  final Empty<T> _self;
-  final $Res Function(Empty<T>) _then;
+  final _Empty<T> _self;
+  final $Res Function(_Empty<T>) _then;
 
 /// Create a copy of ValueFailure
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? failedValue = freezed,}) {
-  return _then(Empty<T>(
+  return _then(_Empty<T>(
 freezed == failedValue ? _self.failedValue : failedValue // ignore: cast_nullable_to_non_nullable
 as T,
   ));
@@ -142,8 +142,8 @@ as T,
 /// @nodoc
 
 
-class InvalidURL<T> implements ValueFailure<T> {
-  const InvalidURL(this.failedValue);
+class _InvalidURL<T> implements ValueFailure<T> {
+  const _InvalidURL(this.failedValue);
   
 
 @override final  T failedValue;
@@ -152,13 +152,13 @@ class InvalidURL<T> implements ValueFailure<T> {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$InvalidURLCopyWith<T, InvalidURL<T>> get copyWith => _$InvalidURLCopyWithImpl<T, InvalidURL<T>>(this, _$identity);
+_$InvalidURLCopyWith<T, _InvalidURL<T>> get copyWith => __$InvalidURLCopyWithImpl<T, _InvalidURL<T>>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InvalidURL<T>&&const DeepCollectionEquality().equals(other.failedValue, failedValue));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _InvalidURL<T>&&const DeepCollectionEquality().equals(other.failedValue, failedValue));
 }
 
 
@@ -174,8 +174,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $InvalidURLCopyWith<T,$Res> implements $ValueFailureCopyWith<T, $Res> {
-  factory $InvalidURLCopyWith(InvalidURL<T> value, $Res Function(InvalidURL<T>) _then) = _$InvalidURLCopyWithImpl;
+abstract mixin class _$InvalidURLCopyWith<T,$Res> implements $ValueFailureCopyWith<T, $Res> {
+  factory _$InvalidURLCopyWith(_InvalidURL<T> value, $Res Function(_InvalidURL<T>) _then) = __$InvalidURLCopyWithImpl;
 @override @useResult
 $Res call({
  T failedValue
@@ -186,17 +186,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$InvalidURLCopyWithImpl<T,$Res>
-    implements $InvalidURLCopyWith<T, $Res> {
-  _$InvalidURLCopyWithImpl(this._self, this._then);
+class __$InvalidURLCopyWithImpl<T,$Res>
+    implements _$InvalidURLCopyWith<T, $Res> {
+  __$InvalidURLCopyWithImpl(this._self, this._then);
 
-  final InvalidURL<T> _self;
-  final $Res Function(InvalidURL<T>) _then;
+  final _InvalidURL<T> _self;
+  final $Res Function(_InvalidURL<T>) _then;
 
 /// Create a copy of ValueFailure
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? failedValue = freezed,}) {
-  return _then(InvalidURL<T>(
+  return _then(_InvalidURL<T>(
 freezed == failedValue ? _self.failedValue : failedValue // ignore: cast_nullable_to_non_nullable
 as T,
   ));

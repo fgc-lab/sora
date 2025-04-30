@@ -7,6 +7,9 @@ part 'gallery_dl_failure.freezed.dart';
 sealed class GalleryDLFailure with _$GalleryDLFailure {
   const factory GalleryDLFailure.galleryDLNotFound() = GalleryDLNotFound;
 
+  const factory GalleryDLFailure.galleryDLGithubLinkFailedToOpen() =
+      GalleryDLGithubLinkFailedToOpen;
+
   const factory GalleryDLFailure.invalidURL(DownloadInfo downloadInfo) =
       InvalidURL;
 

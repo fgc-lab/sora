@@ -77,6 +77,38 @@ String toString() {
 /// @nodoc
 
 
+class GalleryDLFound implements HomeEvent {
+  const GalleryDLFound();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLFound);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeEvent.galleryDLFound()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
 class AddURLButtonPressed implements HomeEvent {
   const AddURLButtonPressed();
   
@@ -587,6 +619,38 @@ $GalleryDLFailureCopyWith<$Res> get failure {
   });
 }
 }
+
+/// @nodoc
+
+
+class GalleryDLLinkPressed implements HomeEvent {
+  const GalleryDLLinkPressed();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLLinkPressed);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'HomeEvent.galleryDLLinkPressed()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 mixin _$HomeState {

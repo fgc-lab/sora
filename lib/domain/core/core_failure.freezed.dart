@@ -85,8 +85,8 @@ $GalleryDLFailureCopyWith<$Res> get f {
 /// @nodoc
 
 
-class _GalleryDL implements CoreFailure {
-  const _GalleryDL(this.f);
+class GalleryDL implements CoreFailure {
+  const GalleryDL(this.f);
   
 
 @override final  GalleryDLFailure f;
@@ -95,13 +95,13 @@ class _GalleryDL implements CoreFailure {
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$GalleryDLCopyWith<_GalleryDL> get copyWith => __$GalleryDLCopyWithImpl<_GalleryDL>(this, _$identity);
+$GalleryDLCopyWith<GalleryDL> get copyWith => _$GalleryDLCopyWithImpl<GalleryDL>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GalleryDL&&(identical(other.f, f) || other.f == f));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDL&&(identical(other.f, f) || other.f == f));
 }
 
 
@@ -117,8 +117,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class _$GalleryDLCopyWith<$Res> implements $CoreFailureCopyWith<$Res> {
-  factory _$GalleryDLCopyWith(_GalleryDL value, $Res Function(_GalleryDL) _then) = __$GalleryDLCopyWithImpl;
+abstract mixin class $GalleryDLCopyWith<$Res> implements $CoreFailureCopyWith<$Res> {
+  factory $GalleryDLCopyWith(GalleryDL value, $Res Function(GalleryDL) _then) = _$GalleryDLCopyWithImpl;
 @override @useResult
 $Res call({
  GalleryDLFailure f
@@ -129,17 +129,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$GalleryDLCopyWithImpl<$Res>
-    implements _$GalleryDLCopyWith<$Res> {
-  __$GalleryDLCopyWithImpl(this._self, this._then);
+class _$GalleryDLCopyWithImpl<$Res>
+    implements $GalleryDLCopyWith<$Res> {
+  _$GalleryDLCopyWithImpl(this._self, this._then);
 
-  final _GalleryDL _self;
-  final $Res Function(_GalleryDL) _then;
+  final GalleryDL _self;
+  final $Res Function(GalleryDL) _then;
 
 /// Create a copy of CoreFailure
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? f = null,}) {
-  return _then(_GalleryDL(
+  return _then(GalleryDL(
 null == f ? _self.f : f // ignore: cast_nullable_to_non_nullable
 as GalleryDLFailure,
   ));
