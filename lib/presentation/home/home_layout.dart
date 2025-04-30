@@ -8,8 +8,7 @@ import 'package:sora/domain/core/value_failure.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/presentation/core/default_button.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
-import 'package:sora/presentation/core/default_text_field.dart';
-import 'package:sora/presentation/home/widgets/home_download_status.dart';
+import 'package:sora/presentation/home/widgets/home_download_list_tile.dart';
 import 'package:sora/presentation/home/widgets/home_gallery_dl_not_found_dialog.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -60,6 +59,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                         case GalleryDLNotFound():
                           showDialog<void>(
                             context: context,
+                            barrierDismissible: false,
                             builder:
                                 (_) => HomeGalleryDLNotFoundDialog(
                                   onPressed:
@@ -102,14 +102,14 @@ class _HomeLayoutState extends State<HomeLayout> {
                                   (info) =>
                                       info.status == DownloadStatus.downloading,
                                 ),
-                                onPressed:
-                                    () => context.read<HomeBloc>().add(
-                                      const HomeEvent.batchDownloadButtonPressed(),
-                                    ),
                                 disabled:
                                     !state.downloadInfos.any(
                                       (info) =>
                                           info.status != DownloadStatus.success,
+                                    ),
+                                onPressed:
+                                    () => context.read<HomeBloc>().add(
+                                      const HomeEvent.batchDownloadButtonPressed(),
                                     ),
                               );
                             },
@@ -139,16 +139,14 @@ class _HomeLayoutState extends State<HomeLayout> {
                                   (info) =>
                                       info.status == DownloadStatus.downloading,
                                 ),
+                                disabled: state.downloadInfos.any(
+                                  (info) =>
+                                      info.status == DownloadStatus.downloading,
+                                ),
                                 onPressed:
-                                    state.downloadInfos.any(
-                                          (info) =>
-                                              info.status ==
-                                              DownloadStatus.downloading,
-                                        )
-                                        ? null
-                                        : () => context.read<HomeBloc>().add(
-                                          const HomeEvent.batchClearButtonPressed(),
-                                        ),
+                                    () => context.read<HomeBloc>().add(
+                                      const HomeEvent.batchClearButtonPressed(),
+                                    ),
                               );
                             },
                           ),
@@ -172,116 +170,65 @@ class _HomeLayoutState extends State<HomeLayout> {
 
                         return Padding(
                           padding: const EdgeInsets.all(10),
-                          child: Row(
-                            children: [
-                              HomeDownloadStatus(
-                                downloadInfo: downloadInfo,
-                                size: 32,
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                  ),
-                                  child: DefaultTextField(
-                                    disabled:
-                                        downloadInfo.status ==
-                                        DownloadStatus.success,
-                                    hintText: 'folder-name',
-                                    controller: folderController,
-                                    onChanged:
-                                        (value) => context.read<HomeBloc>().add(
-                                          HomeEvent.folderChanged(
-                                            downloadInfo.uid,
-                                            value,
-                                          ),
-                                        ),
-                                    validator:
-                                        (_) => context
-                                            .read<HomeBloc>()
-                                            .state
-                                            .downloadInfos[idx]
-                                            .folder
-                                            ?.value
-                                            .match((_) => null, (err) {
-                                              switch (err) {
-                                                case ValueFailure.empty:
-                                                  return 'Folder cannot be empty';
-                                                default:
-                                                  return null;
-                                              }
-                                            }),
+                          child: HomeDownloadListTile(
+                            downloadInfo: downloadInfo,
+                            folderController: folderController,
+                            urlController: urlController,
+                            onFolderChanged:
+                                (value) => context.read<HomeBloc>().add(
+                                  HomeEvent.folderChanged(
+                                    downloadInfo.uid,
+                                    value,
                                   ),
                                 ),
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: DefaultTextField(
-                                  disabled:
-                                      downloadInfo.status ==
-                                      DownloadStatus.success,
-                                  controller: urlController,
-                                  hintText: 'https://example.com',
-                                  onChanged:
-                                      (value) => context.read<HomeBloc>().add(
-                                        HomeEvent.urlChanged(
-                                          downloadInfo.uid,
-                                          value,
-                                        ),
-                                      ),
-                                  validator:
-                                      (_) => context
-                                          .read<HomeBloc>()
-                                          .state
-                                          .downloadInfos[idx]
-                                          .url
-                                          .value
-                                          .match((_) => null, (err) {
-                                            switch (err) {
-                                              case ValueFailure.invalidURL:
-                                                return 'Invalid URL';
-                                              case ValueFailure.empty:
-                                                return 'URL cannot be empty';
-                                              default:
-                                                return null;
-                                            }
-                                          }),
+                            onURLChanged:
+                                (value) => context.read<HomeBloc>().add(
+                                  HomeEvent.urlChanged(downloadInfo.uid, value),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
+                            onDownloadPressed:
+                                () => context.read<HomeBloc>().add(
+                                  HomeEvent.singleDownloadButtonPressed(
+                                    downloadInfo.uid,
+                                  ),
                                 ),
-                                child: DefaultIconButton(
-                                  icon: Icons.download_rounded,
-                                  onPressed:
-                                      downloadInfo.status ==
-                                                  DownloadStatus.downloading ||
-                                              downloadInfo.status ==
-                                                  DownloadStatus.success
-                                          ? null
-                                          : () => context.read<HomeBloc>().add(
-                                            HomeEvent.singleDownloadButtonPressed(
-                                              downloadInfo.uid,
-                                            ),
-                                          ),
+                            onClearPressed:
+                                () => context.read<HomeBloc>().add(
+                                  HomeEvent.clearButtonPressed(
+                                    downloadInfo.uid,
+                                  ),
                                 ),
-                              ),
-                              DefaultIconButton(
-                                icon: Icons.close_rounded,
-                                onPressed:
-                                    downloadInfo.status ==
-                                                DownloadStatus.downloading ||
-                                            downloadInfo.status ==
-                                                DownloadStatus.success
-                                        ? null
-                                        : () => context.read<HomeBloc>().add(
-                                          HomeEvent.clearButtonPressed(
-                                            downloadInfo.uid,
-                                          ),
-                                        ),
-                              ),
-                            ],
+                            folderValidator:
+                                (_) => context
+                                    .read<HomeBloc>()
+                                    .state
+                                    .downloadInfos[idx]
+                                    .folder
+                                    ?.value
+                                    .match((_) => null, (err) {
+                                      switch (err) {
+                                        case ValueFailure.empty:
+                                          return 'Folder cannot be empty';
+                                        default:
+                                          return null;
+                                      }
+                                    }),
+                            urlValidator:
+                                (_) => context
+                                    .read<HomeBloc>()
+                                    .state
+                                    .downloadInfos[idx]
+                                    .url
+                                    .value
+                                    .match((_) => null, (err) {
+                                      switch (err) {
+                                        case ValueFailure.invalidURL:
+                                          return 'Invalid URL';
+                                        case ValueFailure.empty:
+                                          return 'URL cannot be empty';
+                                        default:
+                                          return null;
+                                      }
+                                    }),
                           ),
                         );
                       },

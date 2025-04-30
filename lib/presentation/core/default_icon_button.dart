@@ -6,17 +6,20 @@ class DefaultIconButton extends StatelessWidget {
     required this.icon,
     required this.onPressed,
     super.key,
+    this.disabled = false,
   });
 
   final IconData icon;
 
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
+
+  final bool disabled;
 
   @override
   Widget build(BuildContext context) {
     return IconButton.outlined(
-      icon: Icon(icon),
-      onPressed: onPressed,
+      icon: Icon(icon, color: disabled ? Palette.grey : Palette.black),
+      onPressed: disabled ? null : onPressed,
       style: ButtonStyle(
         shape: WidgetStateProperty.all<OutlinedBorder>(
           RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
