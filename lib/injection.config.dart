@@ -12,6 +12,7 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:sora/application/dashboard/dashboard_cubit.dart' as _i792;
+import 'package:sora/application/downloads/downloads_bloc.dart' as _i614;
 import 'package:sora/application/home/home_bloc.dart' as _i201;
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart' as _i1058;
 import 'package:sora/infrastructure/core/drift_injectable_module.dart' as _i759;
@@ -30,6 +31,9 @@ extension GetItInjectableX on _i174.GetIt {
     await gh.lazySingletonAsync<_i759.DriftSoraDatabase>(
       () => iDriftInjectableModule.drift,
       preResolve: true,
+    );
+    gh.factory<_i614.DownloadsBloc>(
+      () => _i614.DownloadsBloc(gh<_i136.GalleryDLRepository>()),
     );
     gh.lazySingleton<_i1058.IGalleryDLRepository>(
       () => _i136.GalleryDLRepository(gh<_i759.DriftSoraDatabase>()),

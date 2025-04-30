@@ -19,7 +19,7 @@ class DashboardLayout extends StatelessWidget {
     ),
     DashboardItem(
       title: 'Downloads',
-      icon: Icons.download_rounded,
+      icon: Icons.archive_rounded,
       route: const DownloadsRoute(),
     ),
   ];

@@ -22,4 +22,6 @@ abstract class IGalleryDLRepository {
   Future<Result<Unit, GalleryDLFailure>> checkForDuplicate(
     DownloadInfo downloadInfo,
   );
+
+  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchHistory();
 }
