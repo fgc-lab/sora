@@ -54,16 +54,17 @@ class GalleryDLRepository implements IGalleryDLRepository {
 
       final homeDir = Platform.environment['HOME'] ?? '';
 
+      final params = [
+        if (folder != null && folder.isNotEmpty) ...[
+          '-D',
+          path.join(homeDir, 'gallery-dl', folder),
+        ],
+        url,
+      ];
+
       final process = await Process.run(
         'gallery-dl',
-        [
-          if (folder != null && folder.isNotEmpty) ...[
-            '-D',
-            path.join(homeDir, 'gallery-dl', folder),
-          ],
-          url,
-          if (url.contains('x.com')) ...['-o', 'tweet-endpoint=restid'],
-        ],
+        params,
         environment: {'HOME': homeDir},
         workingDirectory: homeDir,
       );

@@ -80,9 +80,7 @@ class HomeDownloadListTile extends StatelessWidget {
         ),
         DefaultIconButton(
           icon: Icons.close_rounded,
-          disabled:
-              downloadInfo.status == DownloadStatus.downloading ||
-              downloadInfo.status == DownloadStatus.success,
+          disabled: downloadInfo.status == DownloadStatus.downloading,
           onPressed: onClearPressed,
         ),
       ],
