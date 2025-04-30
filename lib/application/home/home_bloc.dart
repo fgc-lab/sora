@@ -117,6 +117,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<BatchDownloadButtonPressed>((event, emit) async {
       final downloadInfos =
           state.downloadInfos
+              .where((info) => info.url.isValid)
               .where((info) => info.status != DownloadStatus.success)
               .toList();
 
@@ -125,7 +126,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             state.downloadInfos
                 .map(
                   (info) =>
-                      info.status != DownloadStatus.success
+                      info.url.isValid && info.status != DownloadStatus.success
                           ? info.copyWith(status: DownloadStatus.downloading)
                           : info,
                 )
