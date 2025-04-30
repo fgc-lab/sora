@@ -1,4 +1,3 @@
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sora/application/home/home_bloc.dart';
@@ -12,7 +11,6 @@ import 'package:sora/presentation/core/default_icon_button.dart';
 import 'package:sora/presentation/core/default_text_field.dart';
 import 'package:sora/presentation/home/widgets/home_download_status.dart';
 import 'package:sora/presentation/home/widgets/home_gallery_dl_not_found_dialog.dart';
-import 'package:sora/utils/palette.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key});

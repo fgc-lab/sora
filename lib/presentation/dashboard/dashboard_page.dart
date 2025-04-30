@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sora/application/dashboard/dashboard_cubit.dart';
 import 'package:sora/injection.dart';
 import 'package:sora/presentation/dashboard/dashboard_layout.dart';
-import 'package:sora/presentation/routes/router.gr.dart';
 
 @RoutePage()
 class DashboardPage extends StatelessWidget {
@@ -15,7 +14,7 @@ class DashboardPage extends StatelessWidget {
     return Scaffold(
       body: BlocProvider(
         create: (context) => getIt<DashboardCubit>(),
-        child: SafeArea(child: const DashboardLayout()),
+        child: const SafeArea(child: DashboardLayout()),
       ),
     );
   }
