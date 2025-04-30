@@ -13,6 +13,8 @@ import 'package:sora/domain/core/unique_id.dart';
 import 'package:sora/domain/core/url.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
+import 'package:sora/utils/urls.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';

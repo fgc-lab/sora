@@ -10,6 +10,9 @@ sealed class GalleryDLFailure with _$GalleryDLFailure {
   const factory GalleryDLFailure.githubLinkFailedToOpen() =
       GalleryDLGithubLinkFailedToOpen;
 
+  const factory GalleryDLFailure.galleryDLGithubLinkFailedToOpen() =
+      GalleryDLGithubLinkFailedToOpen;
+
   const factory GalleryDLFailure.invalidURL(DownloadInfo downloadInfo) =
       InvalidURL;
 

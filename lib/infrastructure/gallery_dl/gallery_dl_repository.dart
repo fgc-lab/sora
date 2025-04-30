@@ -17,6 +17,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
   @override
   Future<Result<Unit, GalleryDLFailure>> checkGalleryDLInstallation() async {
     try {
+      return const Err(GalleryDLFailure.galleryDLNotFound());
       final galleryDL = await which('gallery-dl');
 
       if (galleryDL == null) {
