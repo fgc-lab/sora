@@ -5,5 +5,5 @@ part 'core_failure.freezed.dart';
 
 @freezed
 sealed class CoreFailure with _$CoreFailure {
-  const factory CoreFailure.galleryDL(GalleryDLFailure f) = _GalleryDL;
+  const factory CoreFailure.galleryDL(GalleryDLFailure f) = GalleryDL;
 }

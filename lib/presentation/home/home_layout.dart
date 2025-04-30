@@ -2,13 +2,16 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sora/application/home/home_bloc.dart';
+import 'package:sora/domain/core/core_failure.dart';
 import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/domain/core/unique_id.dart';
 import 'package:sora/domain/core/value_failure.dart';
+import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/presentation/core/default_button.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
 import 'package:sora/presentation/core/default_text_field.dart';
 import 'package:sora/presentation/home/widgets/home_download_status.dart';
+import 'package:sora/presentation/home/widgets/home_gallery_dl_not_found_dialog.dart';
 import 'package:sora/utils/palette.dart';
 
 class HomeLayout extends StatefulWidget {
@@ -25,17 +28,6 @@ class _HomeLayoutState extends State<HomeLayout> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<HomeBloc, HomeState>(
-      listenWhen: (previous, current) {
-        if (current.downloadInfos.length != previous.downloadInfos.length) {
-          return true;
-        }
-        if (current.downloadInfos.length == 1) {
-          if (current.downloadInfos != previous.downloadInfos) {
-            return true;
-          }
-        }
-        return false;
-      },
       listener: (context, state) {
         _urlTextEditingControllers.removeWhere(
           (key, _) => !state.downloadInfos.any((info) => info.uid == key),
@@ -58,6 +50,34 @@ class _HomeLayoutState extends State<HomeLayout> {
             );
           }
         }
+
+        state.failureOrOption.when(
+          some:
+              (value) => value.when(
+                ok: (_) {},
+                err: (err) {
+                  switch (err) {
+                    case GalleryDL(:final GalleryDLFailure f):
+                      switch (f) {
+                        case GalleryDLNotFound():
+                          showDialog<void>(
+                            context: context,
+                            builder:
+                                (_) => HomeGalleryDLNotFoundDialog(
+                                  onPressed:
+                                      () => context.read<HomeBloc>().add(
+                                        const HomeEvent.galleryDLLinkPressed(),
+                                      ),
+                                ),
+                          );
+                        default:
+                          break;
+                      }
+                  }
+                },
+              ),
+          none: () {},
+        );
       },
       child: Padding(
         padding: const EdgeInsets.all(7.5),

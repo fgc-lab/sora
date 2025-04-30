@@ -12,4 +12,6 @@ abstract class IGalleryDLRepository {
   Stream<Result<DownloadInfo, GalleryDLFailure>> batchDownload(
     List<DownloadInfo> downloadInfos,
   );
+
+  Future<Result<Unit, GalleryDLFailure>> launchGithubURL();
 }

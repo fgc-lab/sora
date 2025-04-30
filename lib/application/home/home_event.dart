@@ -4,6 +4,8 @@ part of 'home_bloc.dart';
 class HomeEvent with _$HomeEvent {
   const factory HomeEvent.init() = Init;
 
+  const factory HomeEvent.galleryDLFound() = GalleryDLFound;
+
   const factory HomeEvent.addURLButtonPressed() = AddURLButtonPressed;
 
   const factory HomeEvent.urlChanged(UniqueID uid, String url) = URLChanged;
@@ -26,4 +28,6 @@ class HomeEvent with _$HomeEvent {
 
   const factory HomeEvent.downloadFailed(GalleryDLFailure failure) =
       DownloadFailed;
+
+  const factory HomeEvent.galleryDLLinkPressed() = GalleryDLLinkPressed;
 }

@@ -9,17 +9,18 @@ import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/domain/core/non_empty_string.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
+import 'package:sora/utils/urls.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 @LazySingleton(as: IGalleryDLRepository)
 class GalleryDLRepository implements IGalleryDLRepository {
   @override
   Future<Result<Unit, GalleryDLFailure>> checkGalleryDLInstallation() async {
     try {
+      return const Err(GalleryDLFailure.galleryDLNotFound());
       final galleryDL = await which('gallery-dl');
 
-      if (galleryDL == null) {
-        return const Err(GalleryDLFailure.galleryDLNotFound());
-      }
+      if (galleryDL == null) {}
 
       return const Ok(unit);
     } catch (e) {
@@ -104,5 +105,20 @@ class GalleryDLRepository implements IGalleryDLRepository {
     ]);
 
     return stream;
+  }
+
+  @override
+  Future<Result<Unit, GalleryDLFailure>> launchGithubURL() async {
+    try {
+      final result = await launchUrl(Uri.parse(URLs.galleryDLGithub));
+
+      if (result) {
+        return const Ok(unit);
+      }
+
+      return const Err(GalleryDLFailure.unexpected());
+    } catch (e) {
+      return const Err(GalleryDLFailure.unexpected());
+    }
   }
 }

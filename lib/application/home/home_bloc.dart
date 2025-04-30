@@ -13,6 +13,8 @@ import 'package:sora/domain/core/unique_id.dart';
 import 'package:sora/domain/core/url.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
+import 'package:sora/utils/urls.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
@@ -21,7 +23,21 @@ part 'home_state.dart';
 @injectable
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc(this._galleryDLRepository) : super(HomeState.initial()) {
-    on<Init>((event, emit) {
+    on<Init>((event, emit) async {
+      (await _galleryDLRepository.checkGalleryDLInstallation()).match(
+        (_) {
+          add(const HomeEvent.galleryDLFound());
+        },
+        (failure) {
+          emit(
+            state.copyWith(
+              failureOrOption: Some(Err(CoreFailure.galleryDL(failure))),
+            ),
+          );
+        },
+      );
+    });
+    on<GalleryDLFound>((event, emit) {
       final downloadInfo = DownloadInfo.empty().copyWith(
         status: DownloadStatus.pending,
       );
@@ -185,6 +201,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                   .whereType<DownloadInfo>()
                   .toList();
         case GalleryDLNotFound():
+        case GalleryDLGithubLinkFailedToOpen():
           return;
       }
 
@@ -194,6 +211,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           downloadInfos: newDownloadInfos,
         ),
       );
+    });
+    on<GalleryDLLinkPressed>((event, emit) async {
+      (await _galleryDLRepository.launchGithubURL()).match((_) {}, (failure) {
+        emit(
+          state.copyWith(
+            failureOrOption: Some(Err(CoreFailure.galleryDL(failure))),
+          ),
+        );
+      });
     });
   }
 
