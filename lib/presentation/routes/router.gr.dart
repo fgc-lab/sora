@@ -11,7 +11,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i6;
 import 'package:sora/presentation/dashboard/dashboard_page.dart' as _i1;
-import 'package:sora/presentation/downloads/downloads_page.dart' as _i2;
+import 'package:sora/presentation/history/history_page.dart' as _i2;
 import 'package:sora/presentation/home/home_page.dart' as _i3;
 import 'package:sora/presentation/library/library_page.dart' as _i4;
 import 'package:sora/presentation/settings/settings_page.dart' as _i5;
@@ -33,17 +33,17 @@ class DashboardRoute extends _i6.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i2.DownloadsPage]
-class DownloadsRoute extends _i6.PageRouteInfo<void> {
-  const DownloadsRoute({List<_i6.PageRouteInfo>? children})
-    : super(DownloadsRoute.name, initialChildren: children);
+/// [_i2.HistoryPage]
+class HistoryRoute extends _i6.PageRouteInfo<void> {
+  const HistoryRoute({List<_i6.PageRouteInfo>? children})
+    : super(HistoryRoute.name, initialChildren: children);
 
-  static const String name = 'DownloadsRoute';
+  static const String name = 'HistoryRoute';
 
   static _i6.PageInfo page = _i6.PageInfo(
     name,
     builder: (data) {
-      return const _i2.DownloadsPage();
+      return const _i2.HistoryPage();
     },
   );
 }

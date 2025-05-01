@@ -10,6 +10,7 @@ import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/domain/core/non_empty_string.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
+import 'package:sora/infrastructure/core/download_info_dto.dart';
 import 'package:sora/infrastructure/core/drift_injectable_module.dart';
 import 'package:sora/utils/urls.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -30,7 +31,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
       }
 
       return const Ok(unit);
-    } catch (e) {
+    } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
     }
   }
@@ -41,17 +42,6 @@ class GalleryDLRepository implements IGalleryDLRepository {
   ) async {
     try {
       final url = downloadInfo.url.getOrCrash();
-
-      if (url == null || url.isEmpty) {
-        return Err(
-          GalleryDLFailure.invalidURL(
-            downloadInfo.copyWith(
-              status: DownloadStatus.failure,
-              message: NonEmptyString('Invalid URL. Empty string.'),
-            ),
-          ),
-        );
-      }
 
       String? folder = '';
       if (downloadInfo.folder != null) {
@@ -92,7 +82,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
           message: NonEmptyString(process.stdout.toString().trim()),
         ),
       );
-    } catch (e) {
+    } on Exception catch (e) {
       return Err(
         GalleryDLFailure.unexpected(
           downloadInfo: downloadInfo.copyWith(
@@ -125,7 +115,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
       }
 
       return const Err(GalleryDLFailure.githubLinkFailedToOpen());
-    } catch (e) {
+    } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
     }
   }
@@ -137,20 +127,20 @@ class GalleryDLRepository implements IGalleryDLRepository {
     try {
       final url = downloadInfo.url.getOrCrash();
 
-      if (url == null) {
-        return Err(GalleryDLFailure.unexpected(downloadInfo: downloadInfo));
-      }
-
       final folder = downloadInfo.folder?.getOrCrash();
 
       await _drift
           .into(_drift.driftDownloadInfo)
           .insert(
-            DriftDownloadInfoCompanion.insert(url: url, folder: Value(folder)),
+            DriftDownloadInfoCompanion.insert(
+              url: url,
+              folder: Value(folder),
+              updatedAt: Value(DateTime.now()),
+            ),
           );
 
       return const Ok(unit);
-    } catch (e) {
+    } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
     }
   }
@@ -161,10 +151,6 @@ class GalleryDLRepository implements IGalleryDLRepository {
   ) async {
     try {
       final url = downloadInfo.url.getOrCrash();
-
-      if (url == null) {
-        return Err(GalleryDLFailure.unexpected(downloadInfo: downloadInfo));
-      }
 
       final result =
           await (_drift.select(_drift.driftDownloadInfo)
@@ -178,6 +164,37 @@ class GalleryDLRepository implements IGalleryDLRepository {
 
       return const Ok(unit);
     } catch (e) {
+      return const Err(GalleryDLFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Result<int, GalleryDLFailure>> countHistoryItems() async {
+    try {
+      final count = await _drift.driftDownloadInfo.count().getSingle();
+
+      return Ok(count);
+    } catch (e) {
+      return const Err(GalleryDLFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchHistory(
+    int limit, {
+    int? offset,
+  }) async {
+    try {
+      final result =
+          await (_drift.select(_drift.driftDownloadInfo)
+            ..limit(limit, offset: offset)).get();
+
+      return Ok(
+        result
+            .map((info) => DownloadInfoDTO.fromAdapter(info).toDomain())
+            .toList(),
+      );
+    } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
     }
   }

@@ -23,5 +23,10 @@ abstract class IGalleryDLRepository {
     DownloadInfo downloadInfo,
   );
 
-  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchHistory();
+  Future<Result<int, GalleryDLFailure>> countHistoryItems();
+
+  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchHistory(
+    int limit, {
+    int? offset,
+  });
 }

@@ -51,7 +51,8 @@ class $DriftDownloadInfoTable extends DriftDownloadInfo
     aliasedName,
     false,
     type: DriftSqlType.dateTime,
-    requiredDuringInsert: true,
+    requiredDuringInsert: false,
+    defaultValue: Constant(DateTime.now()),
   );
   @override
   List<GeneratedColumn> get $columns => [id, url, folder, updatedAt];
@@ -89,8 +90,6 @@ class $DriftDownloadInfoTable extends DriftDownloadInfo
         _updatedAtMeta,
         updatedAt.isAcceptableOrUnknown(data['updated_at']!, _updatedAtMeta),
       );
-    } else if (isInserting) {
-      context.missing(_updatedAtMeta);
     }
     return context;
   }
@@ -245,9 +244,8 @@ class DriftDownloadInfoCompanion
     this.id = const Value.absent(),
     required String url,
     this.folder = const Value.absent(),
-    required DateTime updatedAt,
-  }) : url = Value(url),
-       updatedAt = Value(updatedAt);
+    this.updatedAt = const Value.absent(),
+  }) : url = Value(url);
   static Insertable<DriftDownloadInfoData> custom({
     Expression<int>? id,
     Expression<String>? url,
@@ -323,7 +321,7 @@ typedef $$DriftDownloadInfoTableCreateCompanionBuilder =
       Value<int> id,
       required String url,
       Value<String?> folder,
-      required DateTime updatedAt,
+      Value<DateTime> updatedAt,
     });
 typedef $$DriftDownloadInfoTableUpdateCompanionBuilder =
     DriftDownloadInfoCompanion Function({
@@ -476,7 +474,7 @@ class $$DriftDownloadInfoTableTableManager
                 Value<int> id = const Value.absent(),
                 required String url,
                 Value<String?> folder = const Value.absent(),
-                required DateTime updatedAt,
+                Value<DateTime> updatedAt = const Value.absent(),
               }) => DriftDownloadInfoCompanion.insert(
                 id: id,
                 url: url,

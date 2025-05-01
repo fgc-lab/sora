@@ -15,6 +15,7 @@ sealed class DownloadInfo with _$DownloadInfo {
     required bool isDuplicate,
     NonEmptyString? folder,
     NonEmptyString? message,
+    DateTime? updatedAt,
   }) = _DownloadInfo;
 
   factory DownloadInfo.empty() => DownloadInfo(

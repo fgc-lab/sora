@@ -13,7 +13,7 @@ class AppRouter extends RootStackRouter {
       children: [
         AutoRoute(path: Routes.home, page: HomeRoute.page),
         AutoRoute(path: Routes.library, page: LibraryRoute.page),
-        AutoRoute(path: Routes.downloads, page: DownloadsRoute.page),
+        AutoRoute(path: Routes.history, page: HistoryRoute.page),
         AutoRoute(path: Routes.settings, page: SettingsRoute.page),
       ],
     ),

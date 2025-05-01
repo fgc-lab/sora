@@ -8,7 +8,7 @@ abstract class ValueObject<T extends Object> extends Equatable {
 
   Result<T, ValueFailure<T>> get value;
 
-  T? getOrCrash() =>
+  T getOrCrash() =>
       value.match((ok) => ok, (err) => throw UnexpectedValueError(err));
 
   T? getOrNull() => value.match((ok) => ok, (err) => null);
