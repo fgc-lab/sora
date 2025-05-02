@@ -53,32 +53,31 @@ class _HomeLayoutState extends State<HomeLayout> {
               (value) => value.when(
                 ok: (_) {},
                 err: (err) {
-                  switch (err) {
-                    case GalleryDL(:final GalleryDLFailure f):
-                      switch (f) {
-                        case GalleryDLNotFound():
-                          showDialog<void>(
-                            context: context,
-                            barrierDismissible: false,
-                            builder:
-                                (_) => BlocProvider<HomeBloc>.value(
-                                  value: context.read<HomeBloc>(),
-                                  child: HomeGalleryDLNotFoundDialog(
-                                    onLinkPressed:
-                                        () => context.read<HomeBloc>().add(
-                                          const HomeEvent.galleryDLLinkPressed(),
-                                        ),
-                                    onRestartPressed:
-                                        () => context.read<HomeBloc>().add(
-                                          const HomeEvent.init(),
-                                        ),
+                  final failure = switch (err) {
+                    GalleryDL(:final GalleryDLFailure f) => f,
+                  };
+
+                  final _ = switch (failure) {
+                    GalleryDLNotFound() => showDialog<void>(
+                      context: context,
+                      barrierDismissible: false,
+                      builder:
+                          (_) => BlocProvider<HomeBloc>.value(
+                            value: context.read<HomeBloc>(),
+                            child: HomeGalleryDLNotFoundDialog(
+                              onLinkPressed:
+                                  () => context.read<HomeBloc>().add(
+                                    const HomeEvent.galleryDLLinkPressed(),
                                   ),
-                                ),
-                          );
-                        default:
-                          break;
-                      }
-                  }
+                              onRestartPressed:
+                                  () => context.read<HomeBloc>().add(
+                                    const HomeEvent.init(),
+                                  ),
+                            ),
+                          ),
+                    ),
+                    _ => null,
+                  };
                 },
               ),
           none: () {},
@@ -212,12 +211,13 @@ class _HomeLayoutState extends State<HomeLayout> {
                                     .folder
                                     ?.value
                                     .match((_) => null, (err) {
-                                      switch (err) {
-                                        case ValueFailure.empty:
-                                          return 'Folder cannot be empty';
-                                        default:
-                                          return null;
-                                      }
+                                      final result = switch (err) {
+                                        ValueFailure.empty =>
+                                          'Folder cannot be empty',
+                                        _ => null,
+                                      };
+
+                                      return result;
                                     }),
                             urlValidator:
                                 (_) => context
@@ -227,14 +227,15 @@ class _HomeLayoutState extends State<HomeLayout> {
                                     .url
                                     .value
                                     .match((_) => null, (err) {
-                                      switch (err) {
-                                        case ValueFailure.invalidURL:
-                                          return 'Invalid URL';
-                                        case ValueFailure.empty:
-                                          return 'URL cannot be empty';
-                                        default:
-                                          return null;
-                                      }
+                                      final result = switch (err) {
+                                        ValueFailure.invalidURL =>
+                                          'Invalid URL',
+                                        ValueFailure.empty =>
+                                          'URL cannot be empty',
+                                        _ => null,
+                                      };
+
+                                      return result;
                                     }),
                           ),
                         );
