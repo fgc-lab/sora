@@ -9,10 +9,10 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      title: 'Sora',
       builder: (_, router) => router!,
       debugShowCheckedModeBanner: false,
       routerConfig: _appRouter.config(),
-      title: 'Sora',
     );
   }
 }

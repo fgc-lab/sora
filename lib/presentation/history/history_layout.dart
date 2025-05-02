@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:intl/intl.dart';
 import 'package:sora/application/history/history_bloc.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
 import 'package:sora/presentation/history/widgets/history_pagination_button.dart';
@@ -36,6 +37,14 @@ class HistoryLayout extends StatelessWidget {
 
                         return ListTile(
                           title: Text(downloadInfo.url.getOrCrash()),
+                          subtitle: Text(
+                            downloadInfo.updatedAt != null
+                                ? DateFormat(
+                                  null,
+                                  'fr',
+                                ).format(downloadInfo.updatedAt!)
+                                : '',
+                          ),
                         );
                       },
                       separatorBuilder: (context, _) => const Divider(),

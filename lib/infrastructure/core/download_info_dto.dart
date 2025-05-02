@@ -44,6 +44,7 @@ extension DownloadInfoDTOX on DownloadInfoDTO {
     folder: folder != null ? NonEmptyString(folder!) : null,
     status: DownloadStatus.unknown,
     isDuplicate: false,
+    updatedAt: updatedAt,
   );
 
   DriftDownloadInfoData toAdapter() => DriftDownloadInfoData(
