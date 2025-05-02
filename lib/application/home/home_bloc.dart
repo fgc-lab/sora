@@ -74,19 +74,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         (await _galleryDLRepository.checkForDuplicate(downloadInfo)).match(
           (_) {},
           (failure) {
-            switch (failure) {
-              case DownloadInfoAlreadyExist(:final downloadInfo):
-                newDownloadInfos =
-                    state.downloadInfos
-                        .map(
-                          (info) => info.uid == event.uid ? downloadInfo : info,
-                        )
-                        .toList();
+            final newDownloadInfos = switch (failure) {
+              DownloadInfoAlreadyExist(:final downloadInfo) =>
+                state.downloadInfos
+                    .map((info) => info.uid == event.uid ? downloadInfo : info)
+                    .toList(),
+              _ => state.downloadInfos,
+            };
 
-                emit(state.copyWith(downloadInfos: newDownloadInfos));
-              default:
-                break;
-            }
+            emit(state.copyWith(downloadInfos: newDownloadInfos));
           },
         );
       }
@@ -209,30 +205,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       )).match((_) {}, (failure) {});
     });
     on<DownloadFailed>((event, emit) {
-      var newDownloadInfos = state.downloadInfos;
-
-      switch (event.failure) {
-        case InvalidURL(:final DownloadInfo downloadInfo):
-          newDownloadInfos =
-              newDownloadInfos
-                  .map(
-                    (info) =>
-                        info.uid == downloadInfo.uid ? downloadInfo : info,
-                  )
-                  .whereType<DownloadInfo>()
-                  .toList();
-        case Unexpected(:final DownloadInfo? downloadInfo):
-          newDownloadInfos =
-              newDownloadInfos
-                  .map(
-                    (info) =>
-                        info.uid == downloadInfo?.uid ? downloadInfo : info,
-                  )
-                  .whereType<DownloadInfo>()
-                  .toList();
-        default:
-          break;
-      }
+      final newDownloadInfos = switch (event.failure) {
+        InvalidURL(:final DownloadInfo downloadInfo) ||
+        Unexpected(:final DownloadInfo downloadInfo) =>
+          state.downloadInfos
+              .map((info) => info.uid == downloadInfo.uid ? downloadInfo : info)
+              .whereType<DownloadInfo>()
+              .toList(),
+        _ => state.downloadInfos,
+      };
 
       emit(
         state.copyWith(
