@@ -36,14 +36,25 @@ class HistoryLayout extends StatelessWidget {
                         final downloadInfo = state.downloadInfos[idx];
 
                         return ListTile(
-                          title: Text(downloadInfo.url.getOrCrash()),
+                          title: Text(
+                            downloadInfo.url.getOrCrash(),
+                            style: const TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: 16,
+                            ),
+                          ),
                           subtitle: Text(
                             downloadInfo.updatedAt != null
-                                ? DateFormat(
-                                  null,
-                                  'fr',
-                                ).format(downloadInfo.updatedAt!)
+                                ? DateFormat().format(downloadInfo.updatedAt!)
                                 : '',
+                            style: const TextStyle(color: Palette.grey),
+                          ),
+                          trailing: DefaultIconButton(
+                            icon: Icons.open_in_new_rounded,
+                            onPressed:
+                                () => context.read<HistoryBloc>().add(
+                                  HistoryEvent.openInNewPressed(downloadInfo),
+                                ),
                           ),
                         );
                       },
@@ -52,39 +63,66 @@ class HistoryLayout extends StatelessWidget {
                   },
                 ),
               ),
-              BlocBuilder<HistoryBloc, HistoryState>(
-                builder: (context, state) {
-                  if (state.itemsCount == 0) {
-                    return Container();
-                  }
+              DecoratedBox(
+                decoration: const BoxDecoration(
+                  border: Border(top: BorderSide(color: Palette.greyLight)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  child: BlocBuilder<HistoryBloc, HistoryState>(
+                    builder: (context, state) {
+                      if (state.itemsCount == 0) {
+                        return Container();
+                      }
 
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      DefaultIconButton(
-                        icon: Icons.arrow_back_ios_rounded,
-                        onPressed: () {},
-                      ),
-                      for (
-                        int i = 0;
-                        i < (state.itemsCount / Pagination.historyItemPerPage);
-                        i++
-                      )
-                        HistoryPaginationButton(
-                          title: '${i + 1}',
-                          onPressed: () {},
-                          color:
-                              i + 1 == state.paginationIdx
-                                  ? Palette.black
-                                  : Palette.white,
-                        ),
-                      DefaultIconButton(
-                        icon: Icons.arrow_forward_ios_rounded,
-                        onPressed: () {},
-                      ),
-                    ],
-                  );
-                },
+                      final pages =
+                          state.itemsCount / Pagination.historyItemPerPage;
+
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          if (pages > 1)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 2.5,
+                              ),
+                              child: DefaultIconButton(
+                                icon: Icons.arrow_back_ios_rounded,
+                                onPressed: () {},
+                              ),
+                            ),
+                          for (int i = 0; i < pages; i++)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 2.5,
+                              ),
+                              child: HistoryPaginationButton(
+                                title: '${i + 1}',
+                                onPressed: () {},
+                                color:
+                                    i + 1 == state.paginationIdx
+                                        ? Palette.black
+                                        : Palette.white,
+                              ),
+                            ),
+                          if (pages > 1)
+                            Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 2.5,
+                              ),
+                              child: DefaultIconButton(
+                                icon: Icons.arrow_forward_ios_rounded,
+                                onPressed: () {},
+                              ),
+                            ),
+                        ],
+                      );
+                    },
+                  ),
+                ),
               ),
             ],
           ),

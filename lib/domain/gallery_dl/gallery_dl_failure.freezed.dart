@@ -334,4 +334,36 @@ $DownloadInfoCopyWith<$Res>? get downloadInfo {
 }
 }
 
+/// @nodoc
+
+
+class GalleryDLURLFailedToOpen implements GalleryDLFailure {
+  const GalleryDLURLFailedToOpen();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLURLFailedToOpen);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'GalleryDLFailure.urlFailedToOpen()';
+}
+
+
+}
+
+
+
+
 // dart format on

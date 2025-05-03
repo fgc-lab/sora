@@ -19,5 +19,5 @@ Future<void> main() async {
 
   Bloc.observer = SoraBlocObserver();
 
-  runApp(App());
+  runApp(TranslationProvider(child: App()));
 }

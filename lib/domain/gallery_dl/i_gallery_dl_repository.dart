@@ -29,4 +29,6 @@ abstract class IGalleryDLRepository {
     int limit, {
     int? offset,
   });
+
+  Future<Result<Unit, GalleryDLFailure>> launchURL(DownloadInfo downloadInfo);
 }

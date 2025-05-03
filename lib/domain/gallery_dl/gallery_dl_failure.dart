@@ -18,4 +18,6 @@ sealed class GalleryDLFailure with _$GalleryDLFailure {
 
   const factory GalleryDLFailure.unexpected({DownloadInfo? downloadInfo}) =
       Unexpected;
+
+  const factory GalleryDLFailure.urlFailedToOpen() = GalleryDLURLFailedToOpen;
 }

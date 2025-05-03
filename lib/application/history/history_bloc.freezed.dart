@@ -141,6 +141,81 @@ as int,
 }
 
 /// @nodoc
+
+
+class OpenInNewPressed implements HistoryEvent {
+  const OpenInNewPressed(this.downloadInfo);
+  
+
+ final  DownloadInfo downloadInfo;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OpenInNewPressedCopyWith<OpenInNewPressed> get copyWith => _$OpenInNewPressedCopyWithImpl<OpenInNewPressed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OpenInNewPressed&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,downloadInfo);
+
+@override
+String toString() {
+  return 'HistoryEvent.openInNewPressed(downloadInfo: $downloadInfo)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OpenInNewPressedCopyWith<$Res> implements $HistoryEventCopyWith<$Res> {
+  factory $OpenInNewPressedCopyWith(OpenInNewPressed value, $Res Function(OpenInNewPressed) _then) = _$OpenInNewPressedCopyWithImpl;
+@useResult
+$Res call({
+ DownloadInfo downloadInfo
+});
+
+
+$DownloadInfoCopyWith<$Res> get downloadInfo;
+
+}
+/// @nodoc
+class _$OpenInNewPressedCopyWithImpl<$Res>
+    implements $OpenInNewPressedCopyWith<$Res> {
+  _$OpenInNewPressedCopyWithImpl(this._self, this._then);
+
+  final OpenInNewPressed _self;
+  final $Res Function(OpenInNewPressed) _then;
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
+  return _then(OpenInNewPressed(
+null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
+as DownloadInfo,
+  ));
+}
+
+/// Create a copy of HistoryEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$DownloadInfoCopyWith<$Res> get downloadInfo {
+  
+  return $DownloadInfoCopyWith<$Res>(_self.downloadInfo, (value) {
+    return _then(_self.copyWith(downloadInfo: value));
+  });
+}
+}
+
+/// @nodoc
 mixin _$HistoryState {
 
  Option<Result<Unit, CoreFailure>> get failureOrOption; List<DownloadInfo> get downloadInfos; int get itemsCount; int get paginationIdx;

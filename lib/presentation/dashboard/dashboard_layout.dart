@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sora/application/dashboard/dashboard_cubit.dart';
 import 'package:sora/domain/dashboard/dashboard_item.dart';
+import 'package:sora/i18n/strings.g.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
 import 'package:sora/presentation/dashboard/widgets/dashboard_list_tile.dart';
 import 'package:sora/presentation/routes/router.gr.dart';
@@ -13,7 +14,7 @@ class DashboardLayout extends StatelessWidget {
 
   final items = [
     DashboardItem(
-      title: 'Home',
+      title: t.home,
       icon: Icons.home_rounded,
       route: const HomeRoute(),
     ),

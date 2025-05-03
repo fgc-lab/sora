@@ -11,6 +11,7 @@ import 'package:sora/domain/core/non_empty_string.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
 import 'package:sora/infrastructure/core/download_info_dto.dart';
+import 'package:sora/infrastructure/core/drift_download_info.dart';
 import 'package:sora/infrastructure/core/drift_injectable_module.dart';
 import 'package:sora/utils/urls.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -163,7 +164,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
       }
 
       return const Ok(unit);
-    } catch (e) {
+    } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
     }
   }
@@ -174,7 +175,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
       final count = await _drift.driftDownloadInfo.count().getSingle();
 
       return Ok(count);
-    } catch (e) {
+    } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
     }
   }
@@ -185,9 +186,12 @@ class GalleryDLRepository implements IGalleryDLRepository {
     int? offset,
   }) async {
     try {
-      final result =
-          await (_drift.select(_drift.driftDownloadInfo)
-            ..limit(limit, offset: offset)).get();
+      final query =
+          _drift.select(_drift.driftDownloadInfo)
+            ..orderBy([(o) => OrderingTerm.desc(o.updatedAt)])
+            ..limit(limit, offset: offset);
+
+      final result = await query.get();
 
       return Ok(
         result
@@ -196,6 +200,29 @@ class GalleryDLRepository implements IGalleryDLRepository {
       );
     } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
+    }
+  }
+
+  @override
+  Future<Result<Unit, GalleryDLFailure>> launchURL(
+    DownloadInfo downloadInfo,
+  ) async {
+    try {
+      final result = await launchUrl(Uri.parse(downloadInfo.url.getOrCrash()));
+
+      if (result) {
+        return const Ok(unit);
+      }
+
+      return const Err(GalleryDLFailure.urlFailedToOpen());
+    } on Exception catch (e) {
+      return Err(
+        GalleryDLFailure.unexpected(
+          downloadInfo: downloadInfo.copyWith(
+            message: NonEmptyString(e.toString().trim()),
+          ),
+        ),
+      );
     }
   }
 }

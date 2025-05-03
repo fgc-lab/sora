@@ -34,6 +34,11 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
         emit(state.copyWith(downloadInfos: downloadInfos));
       }, (failure) {});
     });
+    on<OpenInNewPressed>((event, emit) async {
+      (await _galleryDLRepository.launchURL(
+        event.downloadInfo,
+      )).match((_) {}, (failure) {});
+    });
   }
 
   final IGalleryDLRepository _galleryDLRepository;
