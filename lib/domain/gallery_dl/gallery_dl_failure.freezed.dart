@@ -45,8 +45,8 @@ $GalleryDLFailureCopyWith(GalleryDLFailure _, $Res Function(GalleryDLFailure) __
 /// @nodoc
 
 
-class GalleryDLNotFound implements GalleryDLFailure {
-  const GalleryDLNotFound();
+class GalleryDLCommandNotFound implements GalleryDLFailure {
+  const GalleryDLCommandNotFound();
   
 
 
@@ -56,7 +56,7 @@ class GalleryDLNotFound implements GalleryDLFailure {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLNotFound);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLCommandNotFound);
 }
 
 
@@ -65,7 +65,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GalleryDLFailure.notFound()';
+  return 'GalleryDLFailure.commandNotFound()';
 }
 
 
@@ -77,8 +77,8 @@ String toString() {
 /// @nodoc
 
 
-class GalleryDLGithubLinkFailedToOpen implements GalleryDLFailure {
-  const GalleryDLGithubLinkFailedToOpen();
+class GalleryDLGithubURLFailedToOpen implements GalleryDLFailure {
+  const GalleryDLGithubURLFailedToOpen();
   
 
 
@@ -88,7 +88,7 @@ class GalleryDLGithubLinkFailedToOpen implements GalleryDLFailure {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLGithubLinkFailedToOpen);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLGithubURLFailedToOpen);
 }
 
 
@@ -97,7 +97,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GalleryDLFailure.githubLinkFailedToOpen()';
+  return 'GalleryDLFailure.githubURLFailedToOpen()';
 }
 
 
@@ -109,8 +109,8 @@ String toString() {
 /// @nodoc
 
 
-class DownloadInfoAlreadyExist implements GalleryDLFailure {
-  const DownloadInfoAlreadyExist(this.downloadInfo);
+class GalleryDLContentAlreadyDownloaded implements GalleryDLFailure {
+  const GalleryDLContentAlreadyDownloaded(this.downloadInfo);
   
 
  final  DownloadInfo downloadInfo;
@@ -119,13 +119,13 @@ class DownloadInfoAlreadyExist implements GalleryDLFailure {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$DownloadInfoAlreadyExistCopyWith<DownloadInfoAlreadyExist> get copyWith => _$DownloadInfoAlreadyExistCopyWithImpl<DownloadInfoAlreadyExist>(this, _$identity);
+$GalleryDLContentAlreadyDownloadedCopyWith<GalleryDLContentAlreadyDownloaded> get copyWith => _$GalleryDLContentAlreadyDownloadedCopyWithImpl<GalleryDLContentAlreadyDownloaded>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadInfoAlreadyExist&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLContentAlreadyDownloaded&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
 }
 
 
@@ -134,15 +134,15 @@ int get hashCode => Object.hash(runtimeType,downloadInfo);
 
 @override
 String toString() {
-  return 'GalleryDLFailure.alreadyExist(downloadInfo: $downloadInfo)';
+  return 'GalleryDLFailure.contenAlreadyDownloaded(downloadInfo: $downloadInfo)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $DownloadInfoAlreadyExistCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
-  factory $DownloadInfoAlreadyExistCopyWith(DownloadInfoAlreadyExist value, $Res Function(DownloadInfoAlreadyExist) _then) = _$DownloadInfoAlreadyExistCopyWithImpl;
+abstract mixin class $GalleryDLContentAlreadyDownloadedCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
+  factory $GalleryDLContentAlreadyDownloadedCopyWith(GalleryDLContentAlreadyDownloaded value, $Res Function(GalleryDLContentAlreadyDownloaded) _then) = _$GalleryDLContentAlreadyDownloadedCopyWithImpl;
 @useResult
 $Res call({
  DownloadInfo downloadInfo
@@ -153,17 +153,17 @@ $DownloadInfoCopyWith<$Res> get downloadInfo;
 
 }
 /// @nodoc
-class _$DownloadInfoAlreadyExistCopyWithImpl<$Res>
-    implements $DownloadInfoAlreadyExistCopyWith<$Res> {
-  _$DownloadInfoAlreadyExistCopyWithImpl(this._self, this._then);
+class _$GalleryDLContentAlreadyDownloadedCopyWithImpl<$Res>
+    implements $GalleryDLContentAlreadyDownloadedCopyWith<$Res> {
+  _$GalleryDLContentAlreadyDownloadedCopyWithImpl(this._self, this._then);
 
-  final DownloadInfoAlreadyExist _self;
-  final $Res Function(DownloadInfoAlreadyExist) _then;
+  final GalleryDLContentAlreadyDownloaded _self;
+  final $Res Function(GalleryDLContentAlreadyDownloaded) _then;
 
 /// Create a copy of GalleryDLFailure
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
-  return _then(DownloadInfoAlreadyExist(
+  return _then(GalleryDLContentAlreadyDownloaded(
 null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
 as DownloadInfo,
   ));
@@ -184,8 +184,8 @@ $DownloadInfoCopyWith<$Res> get downloadInfo {
 /// @nodoc
 
 
-class InvalidURL implements GalleryDLFailure {
-  const InvalidURL(this.downloadInfo);
+class GalleryDLInvalidURL implements GalleryDLFailure {
+  const GalleryDLInvalidURL(this.downloadInfo);
   
 
  final  DownloadInfo downloadInfo;
@@ -194,13 +194,13 @@ class InvalidURL implements GalleryDLFailure {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$InvalidURLCopyWith<InvalidURL> get copyWith => _$InvalidURLCopyWithImpl<InvalidURL>(this, _$identity);
+$GalleryDLInvalidURLCopyWith<GalleryDLInvalidURL> get copyWith => _$GalleryDLInvalidURLCopyWithImpl<GalleryDLInvalidURL>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is InvalidURL&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLInvalidURL&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
 }
 
 
@@ -216,8 +216,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $InvalidURLCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
-  factory $InvalidURLCopyWith(InvalidURL value, $Res Function(InvalidURL) _then) = _$InvalidURLCopyWithImpl;
+abstract mixin class $GalleryDLInvalidURLCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
+  factory $GalleryDLInvalidURLCopyWith(GalleryDLInvalidURL value, $Res Function(GalleryDLInvalidURL) _then) = _$GalleryDLInvalidURLCopyWithImpl;
 @useResult
 $Res call({
  DownloadInfo downloadInfo
@@ -228,17 +228,17 @@ $DownloadInfoCopyWith<$Res> get downloadInfo;
 
 }
 /// @nodoc
-class _$InvalidURLCopyWithImpl<$Res>
-    implements $InvalidURLCopyWith<$Res> {
-  _$InvalidURLCopyWithImpl(this._self, this._then);
+class _$GalleryDLInvalidURLCopyWithImpl<$Res>
+    implements $GalleryDLInvalidURLCopyWith<$Res> {
+  _$GalleryDLInvalidURLCopyWithImpl(this._self, this._then);
 
-  final InvalidURL _self;
-  final $Res Function(InvalidURL) _then;
+  final GalleryDLInvalidURL _self;
+  final $Res Function(GalleryDLInvalidURL) _then;
 
 /// Create a copy of GalleryDLFailure
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
-  return _then(InvalidURL(
+  return _then(GalleryDLInvalidURL(
 null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
 as DownloadInfo,
   ));
@@ -259,8 +259,8 @@ $DownloadInfoCopyWith<$Res> get downloadInfo {
 /// @nodoc
 
 
-class Unexpected implements GalleryDLFailure {
-  const Unexpected({this.downloadInfo});
+class GalleryDLUnexpected implements GalleryDLFailure {
+  const GalleryDLUnexpected({this.downloadInfo});
   
 
  final  DownloadInfo? downloadInfo;
@@ -269,13 +269,13 @@ class Unexpected implements GalleryDLFailure {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$UnexpectedCopyWith<Unexpected> get copyWith => _$UnexpectedCopyWithImpl<Unexpected>(this, _$identity);
+$GalleryDLUnexpectedCopyWith<GalleryDLUnexpected> get copyWith => _$GalleryDLUnexpectedCopyWithImpl<GalleryDLUnexpected>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Unexpected&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLUnexpected&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
 }
 
 
@@ -291,8 +291,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $UnexpectedCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
-  factory $UnexpectedCopyWith(Unexpected value, $Res Function(Unexpected) _then) = _$UnexpectedCopyWithImpl;
+abstract mixin class $GalleryDLUnexpectedCopyWith<$Res> implements $GalleryDLFailureCopyWith<$Res> {
+  factory $GalleryDLUnexpectedCopyWith(GalleryDLUnexpected value, $Res Function(GalleryDLUnexpected) _then) = _$GalleryDLUnexpectedCopyWithImpl;
 @useResult
 $Res call({
  DownloadInfo? downloadInfo
@@ -303,17 +303,17 @@ $DownloadInfoCopyWith<$Res>? get downloadInfo;
 
 }
 /// @nodoc
-class _$UnexpectedCopyWithImpl<$Res>
-    implements $UnexpectedCopyWith<$Res> {
-  _$UnexpectedCopyWithImpl(this._self, this._then);
+class _$GalleryDLUnexpectedCopyWithImpl<$Res>
+    implements $GalleryDLUnexpectedCopyWith<$Res> {
+  _$GalleryDLUnexpectedCopyWithImpl(this._self, this._then);
 
-  final Unexpected _self;
-  final $Res Function(Unexpected) _then;
+  final GalleryDLUnexpected _self;
+  final $Res Function(GalleryDLUnexpected) _then;
 
 /// Create a copy of GalleryDLFailure
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? downloadInfo = freezed,}) {
-  return _then(Unexpected(
+  return _then(GalleryDLUnexpected(
 downloadInfo: freezed == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
 as DownloadInfo?,
   ));
@@ -337,8 +337,8 @@ $DownloadInfoCopyWith<$Res>? get downloadInfo {
 /// @nodoc
 
 
-class GalleryDLURLFailedToOpen implements GalleryDLFailure {
-  const GalleryDLURLFailedToOpen();
+class GalleryDLContentURLFailedToOpen implements GalleryDLFailure {
+  const GalleryDLContentURLFailedToOpen();
   
 
 
@@ -348,7 +348,7 @@ class GalleryDLURLFailedToOpen implements GalleryDLFailure {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLURLFailedToOpen);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLContentURLFailedToOpen);
 }
 
 
@@ -357,7 +357,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GalleryDLFailure.urlFailedToOpen()';
+  return 'GalleryDLFailure.contentURLFailedToOpen()';
 }
 
 

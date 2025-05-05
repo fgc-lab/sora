@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sora/application/home/home_bloc.dart';
+import 'package:sora/application/downloads/downloads_bloc.dart';
 import 'package:sora/domain/core/core_failure.dart';
 import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/domain/core/unique_id.dart';
@@ -8,23 +8,23 @@ import 'package:sora/domain/core/value_failure.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/presentation/core/default_button.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
-import 'package:sora/presentation/home/widgets/home_download_list_tile.dart';
-import 'package:sora/presentation/home/widgets/home_gallery_dl_not_found_dialog.dart';
+import 'package:sora/presentation/downloads/widgets/downloads_gallery_dl_not_found_dialog.dart';
+import 'package:sora/presentation/downloads/widgets/download_list_tile.dart';
 
-class HomeLayout extends StatefulWidget {
-  const HomeLayout({super.key});
+class DownloadsLayout extends StatefulWidget {
+  const DownloadsLayout({super.key});
 
   @override
-  State<HomeLayout> createState() => _HomeLayoutState();
+  State<DownloadsLayout> createState() => _DownloadsLayoutState();
 }
 
-class _HomeLayoutState extends State<HomeLayout> {
+class _DownloadsLayoutState extends State<DownloadsLayout> {
   final _urlTextEditingControllers = <UniqueID, TextEditingController>{};
   final _folderTextEditingControllers = <UniqueID, TextEditingController>{};
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HomeBloc, HomeState>(
+    return BlocListener<DownloadsBloc, DownloadsState>(
       listener: (context, state) {
         _urlTextEditingControllers.removeWhere(
           (key, _) => !state.downloadInfos.any((info) => info.uid == key),
@@ -58,20 +58,20 @@ class _HomeLayoutState extends State<HomeLayout> {
                   };
 
                   final _ = switch (failure) {
-                    GalleryDLNotFound() => showDialog<void>(
+                    GalleryDLCommandNotFound() => showDialog<void>(
                       context: context,
                       barrierDismissible: false,
                       builder:
-                          (_) => BlocProvider<HomeBloc>.value(
-                            value: context.read<HomeBloc>(),
-                            child: HomeGalleryDLNotFoundDialog(
+                          (_) => BlocProvider<DownloadsBloc>.value(
+                            value: context.read<DownloadsBloc>(),
+                            child: DownloadsGalleryDLNotFoundDialog(
                               onLinkPressed:
-                                  () => context.read<HomeBloc>().add(
-                                    const HomeEvent.galleryDLLinkPressed(),
+                                  () => context.read<DownloadsBloc>().add(
+                                    const DownloadsEvent.galleryDLURLPressed(),
                                   ),
                               onRestartPressed:
-                                  () => context.read<HomeBloc>().add(
-                                    const HomeEvent.init(),
+                                  () => context.read<DownloadsBloc>().add(
+                                    const DownloadsEvent.init(),
                                   ),
                             ),
                           ),
@@ -100,7 +100,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                     Expanded(
                       child: Row(
                         children: [
-                          BlocBuilder<HomeBloc, HomeState>(
+                          BlocBuilder<DownloadsBloc, DownloadsState>(
                             builder: (context, state) {
                               return DefaultButton(
                                 title: 'Download all',
@@ -114,8 +114,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                                           info.status != DownloadStatus.success,
                                     ),
                                 onPressed:
-                                    () => context.read<HomeBloc>().add(
-                                      const HomeEvent.batchDownloadButtonPressed(),
+                                    () => context.read<DownloadsBloc>().add(
+                                      const DownloadsEvent.batchDownloadButtonPressed(),
                                     ),
                               );
                             },
@@ -124,8 +124,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: DefaultIconButton(
                               onPressed:
-                                  () => context.read<HomeBloc>().add(
-                                    const HomeEvent.addURLButtonPressed(),
+                                  () => context.read<DownloadsBloc>().add(
+                                    const DownloadsEvent.addURLButtonPressed(),
                                   ),
                               icon: Icons.add,
                             ),
@@ -137,7 +137,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          BlocBuilder<HomeBloc, HomeState>(
+                          BlocBuilder<DownloadsBloc, DownloadsState>(
                             builder: (context, state) {
                               return DefaultButton(
                                 title: 'Clear all',
@@ -150,8 +150,8 @@ class _HomeLayoutState extends State<HomeLayout> {
                                       info.status == DownloadStatus.downloading,
                                 ),
                                 onPressed:
-                                    () => context.read<HomeBloc>().add(
-                                      const HomeEvent.batchClearButtonPressed(),
+                                    () => context.read<DownloadsBloc>().add(
+                                      const DownloadsEvent.batchClearButtonPressed(),
                                     ),
                               );
                             },
@@ -163,7 +163,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                 ),
               ),
               Expanded(
-                child: BlocBuilder<HomeBloc, HomeState>(
+                child: BlocBuilder<DownloadsBloc, DownloadsState>(
                   builder: (context, state) {
                     return ListView.separated(
                       itemCount: state.downloadInfos.length,
@@ -176,36 +176,39 @@ class _HomeLayoutState extends State<HomeLayout> {
 
                         return Padding(
                           padding: const EdgeInsets.all(10),
-                          child: HomeDownloadListTile(
+                          child: DownloadListTile(
                             downloadInfo: downloadInfo,
                             folderController: folderController,
                             urlController: urlController,
                             onFolderChanged:
-                                (value) => context.read<HomeBloc>().add(
-                                  HomeEvent.folderChanged(
+                                (value) => context.read<DownloadsBloc>().add(
+                                  DownloadsEvent.folderChanged(
                                     downloadInfo.uid,
                                     value,
                                   ),
                                 ),
                             onURLChanged:
-                                (value) => context.read<HomeBloc>().add(
-                                  HomeEvent.urlChanged(downloadInfo.uid, value),
+                                (value) => context.read<DownloadsBloc>().add(
+                                  DownloadsEvent.urlChanged(
+                                    downloadInfo.uid,
+                                    value,
+                                  ),
                                 ),
                             onDownloadPressed:
-                                () => context.read<HomeBloc>().add(
-                                  HomeEvent.singleDownloadButtonPressed(
+                                () => context.read<DownloadsBloc>().add(
+                                  DownloadsEvent.singleDownloadButtonPressed(
                                     downloadInfo.uid,
                                   ),
                                 ),
                             onClearPressed:
-                                () => context.read<HomeBloc>().add(
-                                  HomeEvent.clearButtonPressed(
+                                () => context.read<DownloadsBloc>().add(
+                                  DownloadsEvent.clearButtonPressed(
                                     downloadInfo.uid,
                                   ),
                                 ),
                             folderValidator:
                                 (_) => context
-                                    .read<HomeBloc>()
+                                    .read<DownloadsBloc>()
                                     .state
                                     .downloadInfos[idx]
                                     .folder
@@ -221,7 +224,7 @@ class _HomeLayoutState extends State<HomeLayout> {
                                     }),
                             urlValidator:
                                 (_) => context
-                                    .read<HomeBloc>()
+                                    .read<DownloadsBloc>()
                                     .state
                                     .downloadInfos[idx]
                                     .url

@@ -39,7 +39,18 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 	Translations $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => Translations(meta: meta ?? this.$meta);
 
 	// Translations
-	String get home => 'Home';
+	late final TranslationsDashboardEn dashboard = TranslationsDashboardEn._(_root);
+}
+
+// Path: dashboard
+class TranslationsDashboardEn {
+	TranslationsDashboardEn._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+	String get downloads => 'Downloads';
+	String get archives => 'Archives';
 }
 
 /// Flat map(s) containing all translations.
@@ -47,7 +58,8 @@ class Translations implements BaseTranslations<AppLocale, Translations> {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		switch (path) {
-			case 'home': return 'Home';
+			case 'dashboard.downloads': return 'Downloads';
+			case 'dashboard.archives': return 'Archives';
 			default: return null;
 		}
 	}

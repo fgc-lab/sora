@@ -1,6 +1,8 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 import 'package:injectable/injectable.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
 import 'package:sora/infrastructure/core/drift_download_info.dart';
 
 part 'drift_injectable_module.g.dart';
@@ -14,7 +16,15 @@ class DriftSoraDatabase extends _$DriftSoraDatabase {
   int get schemaVersion => 1;
 
   static QueryExecutor _openConnection() {
-    return driftDatabase(name: 'soradb', native: const DriftNativeOptions());
+    return driftDatabase(
+      name: 'soradb',
+      native: const DriftNativeOptions(databaseDirectory: getDatabasePath),
+    );
+  }
+
+  static Future<String> getDatabasePath() async {
+    final directory = await getApplicationSupportDirectory();
+    return path.join(directory.path, 'sora');
   }
 }
 

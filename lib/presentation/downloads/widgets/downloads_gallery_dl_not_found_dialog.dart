@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sora/presentation/core/default_button.dart';
 import 'package:sora/utils/palette.dart';
 
-class HomeGalleryDLNotFoundDialog extends StatelessWidget {
-  const HomeGalleryDLNotFoundDialog({
+class DownloadsGalleryDLNotFoundDialog extends StatelessWidget {
+  const DownloadsGalleryDLNotFoundDialog({
     required this.onLinkPressed,
     required this.onRestartPressed,
     super.key,

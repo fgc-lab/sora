@@ -1,3 +1,3 @@
 class Pagination {
-  static int historyItemPerPage = 20;
+  static int archiveItemPerPage = 20;
 }

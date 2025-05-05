@@ -7,6 +7,8 @@ class DefaultIconButton extends StatelessWidget {
     required this.onPressed,
     super.key,
     this.disabled = false,
+    this.backgroundColor,
+    this.iconColor,
   });
 
   final IconData icon;
@@ -15,10 +17,17 @@ class DefaultIconButton extends StatelessWidget {
 
   final bool disabled;
 
+  final Color? backgroundColor;
+
+  final Color? iconColor;
+
   @override
   Widget build(BuildContext context) {
     return IconButton.outlined(
-      icon: Icon(icon, color: disabled ? Palette.grey : Palette.black),
+      icon: Icon(
+        icon,
+        color: disabled ? Palette.grey : iconColor ?? Palette.black,
+      ),
       onPressed: disabled ? null : onPressed,
       style: ButtonStyle(
         shape: WidgetStateProperty.all<OutlinedBorder>(
@@ -26,6 +35,9 @@ class DefaultIconButton extends StatelessWidget {
         ),
         side: WidgetStateProperty.all<BorderSide>(
           const BorderSide(color: Palette.grey),
+        ),
+        backgroundColor: WidgetStateProperty.all<Color>(
+          backgroundColor ?? Palette.white,
         ),
       ),
     );

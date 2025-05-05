@@ -11,9 +11,9 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
+import 'package:sora/application/archives/archives_bloc.dart' as _i357;
 import 'package:sora/application/dashboard/dashboard_cubit.dart' as _i792;
-import 'package:sora/application/history/history_bloc.dart' as _i754;
-import 'package:sora/application/home/home_bloc.dart' as _i201;
+import 'package:sora/application/downloads/downloads_bloc.dart' as _i614;
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart' as _i1058;
 import 'package:sora/infrastructure/core/drift_injectable_module.dart' as _i759;
 import 'package:sora/infrastructure/gallery_dl/gallery_dl_repository.dart'
@@ -35,11 +35,11 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i1058.IGalleryDLRepository>(
       () => _i136.GalleryDLRepository(gh<_i759.DriftSoraDatabase>()),
     );
-    gh.factory<_i201.HomeBloc>(
-      () => _i201.HomeBloc(gh<_i1058.IGalleryDLRepository>()),
+    gh.factory<_i357.ArchivesBloc>(
+      () => _i357.ArchivesBloc(gh<_i1058.IGalleryDLRepository>()),
     );
-    gh.factory<_i754.HistoryBloc>(
-      () => _i754.HistoryBloc(gh<_i1058.IGalleryDLRepository>()),
+    gh.factory<_i614.DownloadsBloc>(
+      () => _i614.DownloadsBloc(gh<_i1058.IGalleryDLRepository>()),
     );
     return this;
   }

@@ -11,7 +11,6 @@ import 'package:sora/domain/core/non_empty_string.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
 import 'package:sora/infrastructure/core/download_info_dto.dart';
-import 'package:sora/infrastructure/core/drift_download_info.dart';
 import 'package:sora/infrastructure/core/drift_injectable_module.dart';
 import 'package:sora/utils/urls.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -28,7 +27,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
       final galleryDL = await which('gallery-dl');
 
       if (galleryDL == null) {
-        return const Err(GalleryDLFailure.notFound());
+        return const Err(GalleryDLFailure.commandNotFound());
       }
 
       return const Ok(unit);
@@ -115,7 +114,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
         return const Ok(unit);
       }
 
-      return const Err(GalleryDLFailure.githubLinkFailedToOpen());
+      return const Err(GalleryDLFailure.githubURLFailedToOpen());
     } on Exception catch (_) {
       return const Err(GalleryDLFailure.unexpected());
     }
@@ -160,7 +159,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
       if (result.isNotEmpty) {
         final newDownloadInfo = downloadInfo.copyWith(isDuplicate: true);
 
-        return Err(GalleryDLFailure.alreadyExist(newDownloadInfo));
+        return Err(GalleryDLFailure.contenAlreadyDownloaded(newDownloadInfo));
       }
 
       return const Ok(unit);
@@ -170,7 +169,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
   }
 
   @override
-  Future<Result<int, GalleryDLFailure>> countHistoryItems() async {
+  Future<Result<int, GalleryDLFailure>> countArchivesItems() async {
     try {
       final count = await _drift.driftDownloadInfo.count().getSingle();
 
@@ -181,7 +180,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
   }
 
   @override
-  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchHistory(
+  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchArchives(
     int limit, {
     int? offset,
   }) async {
@@ -204,7 +203,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
   }
 
   @override
-  Future<Result<Unit, GalleryDLFailure>> launchURL(
+  Future<Result<Unit, GalleryDLFailure>> launchContentURL(
     DownloadInfo downloadInfo,
   ) async {
     try {
@@ -214,7 +213,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
         return const Ok(unit);
       }
 
-      return const Err(GalleryDLFailure.urlFailedToOpen());
+      return const Err(GalleryDLFailure.contentURLFailedToOpen());
     } on Exception catch (e) {
       return Err(
         GalleryDLFailure.unexpected(

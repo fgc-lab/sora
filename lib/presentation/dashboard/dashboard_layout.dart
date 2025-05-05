@@ -14,14 +14,14 @@ class DashboardLayout extends StatelessWidget {
 
   final items = [
     DashboardItem(
-      title: t.home,
-      icon: Icons.home_rounded,
-      route: const HomeRoute(),
+      title: t.dashboard.downloads,
+      icon: Icons.download_rounded,
+      route: const DownloadsRoute(),
     ),
     DashboardItem(
-      title: 'History',
+      title: t.dashboard.archives,
       icon: Icons.archive_rounded,
-      route: const HistoryRoute(),
+      route: const ArchivesRoute(),
     ),
   ];
 
@@ -85,6 +85,16 @@ class DashboardLayout extends StatelessWidget {
                                                 )
                                                 : DefaultIconButton(
                                                   icon: item.value.icon,
+                                                  backgroundColor:
+                                                      state.currentIdx ==
+                                                              item.key
+                                                          ? Palette.black
+                                                          : null,
+                                                  iconColor:
+                                                      state.currentIdx ==
+                                                              item.key
+                                                          ? Palette.white
+                                                          : null,
                                                   onPressed:
                                                       () =>
                                                           context

@@ -5,19 +5,21 @@ part 'gallery_dl_failure.freezed.dart';
 
 @freezed
 sealed class GalleryDLFailure with _$GalleryDLFailure {
-  const factory GalleryDLFailure.notFound() = GalleryDLNotFound;
+  const factory GalleryDLFailure.commandNotFound() = GalleryDLCommandNotFound;
 
-  const factory GalleryDLFailure.githubLinkFailedToOpen() =
-      GalleryDLGithubLinkFailedToOpen;
+  const factory GalleryDLFailure.githubURLFailedToOpen() =
+      GalleryDLGithubURLFailedToOpen;
 
-  const factory GalleryDLFailure.alreadyExist(DownloadInfo downloadInfo) =
-      DownloadInfoAlreadyExist;
+  const factory GalleryDLFailure.contenAlreadyDownloaded(
+    DownloadInfo downloadInfo,
+  ) = GalleryDLContentAlreadyDownloaded;
 
   const factory GalleryDLFailure.invalidURL(DownloadInfo downloadInfo) =
-      InvalidURL;
+      GalleryDLInvalidURL;
 
   const factory GalleryDLFailure.unexpected({DownloadInfo? downloadInfo}) =
-      Unexpected;
+      GalleryDLUnexpected;
 
-  const factory GalleryDLFailure.urlFailedToOpen() = GalleryDLURLFailedToOpen;
+  const factory GalleryDLFailure.contentURLFailedToOpen() =
+      GalleryDLContentURLFailedToOpen;
 }

@@ -1,15 +1,15 @@
-part of 'history_bloc.dart';
+part of 'archives_bloc.dart';
 
 @freezed
-sealed class HistoryState with _$HistoryState {
-  const factory HistoryState({
+sealed class ArchivesState with _$ArchivesState {
+  const factory ArchivesState({
     required Option<Result<Unit, CoreFailure>> failureOrOption,
     required List<DownloadInfo> downloadInfos,
     required int itemsCount,
     required int paginationIdx,
-  }) = _HistoryState;
+  }) = _ArchivesState;
 
-  factory HistoryState.initial() => const HistoryState(
+  factory ArchivesState.initial() => const ArchivesState(
     failureOrOption: None(),
     downloadInfos: [],
     itemsCount: 0,

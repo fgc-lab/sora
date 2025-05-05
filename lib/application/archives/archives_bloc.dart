@@ -7,37 +7,48 @@ import 'package:sora/domain/core/download_info.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
 import 'package:sora/utils/pagination.dart';
 
-part 'history_event.dart';
-part 'history_state.dart';
-part 'history_bloc.freezed.dart';
+part 'archives_bloc.freezed.dart';
+part 'archives_event.dart';
+part 'archives_state.dart';
 
 @injectable
-class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
-  HistoryBloc(this._galleryDLRepository) : super(HistoryState.initial()) {
+class ArchivesBloc extends Bloc<ArchivesEvent, ArchivesState> {
+  ArchivesBloc(this._galleryDLRepository) : super(ArchivesState.initial()) {
     on<Init>((event, emit) async {
-      (await _galleryDLRepository.countHistoryItems()).match((count) {
+      (await _galleryDLRepository.countArchivesItems()).match((count) {
         emit(state.copyWith(itemsCount: count));
 
-        add(HistoryEvent.itemsCounted(count));
+        add(const ArchivesEvent.itemsCounted());
       }, (failure) {});
     });
     on<ItemsCounted>((event, emit) async {
       final offset =
           state.paginationIdx == 0
               ? null
-              : state.paginationIdx * Pagination.historyItemPerPage;
+              : state.paginationIdx * Pagination.archiveItemPerPage;
 
-      (await _galleryDLRepository.fetchHistory(
-        Pagination.historyItemPerPage,
+      (await _galleryDLRepository.fetchArchives(
+        Pagination.archiveItemPerPage,
         offset: offset,
       )).match((downloadInfos) {
         emit(state.copyWith(downloadInfos: downloadInfos));
       }, (failure) {});
     });
     on<OpenInNewPressed>((event, emit) async {
-      (await _galleryDLRepository.launchURL(
+      (await _galleryDLRepository.launchContentURL(
         event.downloadInfo,
       )).match((_) {}, (failure) {});
+    });
+    on<PagePressed>((event, emit) {
+      final newIdx = event.idx;
+
+      if (newIdx == state.paginationIdx) {
+        return;
+      }
+
+      emit(state.copyWith(paginationIdx: newIdx));
+
+      add(const ArchivesEvent.itemsCounted());
     });
   }
 

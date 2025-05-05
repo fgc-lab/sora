@@ -14,17 +14,17 @@ import 'package:sora/domain/core/url.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
 
-part 'home_bloc.freezed.dart';
-part 'home_event.dart';
-part 'home_state.dart';
+part 'downloads_bloc.freezed.dart';
+part 'downloads_event.dart';
+part 'downloads_state.dart';
 
 @injectable
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc(this._galleryDLRepository) : super(HomeState.initial()) {
+class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
+  DownloadsBloc(this._galleryDLRepository) : super(DownloadsState.initial()) {
     on<Init>((event, emit) async {
       (await _galleryDLRepository.checkGalleryDLInstallation()).match(
         (_) {
-          add(const HomeEvent.galleryDLFound());
+          add(const DownloadsEvent.galleryDLFound());
         },
         (failure) {
           emit(
@@ -75,7 +75,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           (_) {},
           (failure) {
             final newDownloadInfos = switch (failure) {
-              DownloadInfoAlreadyExist(:final downloadInfo) =>
+              GalleryDLContentAlreadyDownloaded(:final downloadInfo) =>
                 state.downloadInfos
                     .map((info) => info.uid == event.uid ? downloadInfo : info)
                     .toList(),
@@ -129,10 +129,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
         (await _galleryDLRepository.download(currentDownloadInfo)).match(
           (downloadInfo) {
-            add(HomeEvent.downloadSucceeded(downloadInfo));
+            add(DownloadsEvent.downloadSucceeded(downloadInfo));
           },
           (failure) {
-            add(HomeEvent.downloadFailed(failure));
+            add(DownloadsEvent.downloadFailed(failure));
           },
         );
       }
@@ -163,10 +163,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             .listen(
               (result) => result.match(
                 (downloadInfo) {
-                  add(HomeEvent.downloadSucceeded(downloadInfo));
+                  add(DownloadsEvent.downloadSucceeded(downloadInfo));
                 },
                 (failure) {
-                  add(HomeEvent.downloadFailed(failure));
+                  add(DownloadsEvent.downloadFailed(failure));
                 },
               ),
             );
@@ -177,7 +177,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           state.downloadInfos.where((info) => info.uid != event.uid).toList();
 
       if (newDownloadInfos.isEmpty) {
-        add(const HomeEvent.init());
+        add(const DownloadsEvent.init());
       } else {
         emit(state.copyWith(downloadInfos: newDownloadInfos));
       }
@@ -185,7 +185,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<BatchClearButtonPressed>((event, emit) {
       emit(state.copyWith(downloadInfos: []));
 
-      add(const HomeEvent.init());
+      add(const DownloadsEvent.init());
     });
     on<DownloadSucceeded>((event, emit) async {
       final newDownloadInfos =
@@ -206,8 +206,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     });
     on<DownloadFailed>((event, emit) {
       final newDownloadInfos = switch (event.failure) {
-        InvalidURL(:final DownloadInfo downloadInfo) ||
-        Unexpected(:final DownloadInfo downloadInfo) =>
+        GalleryDLInvalidURL(:final DownloadInfo downloadInfo) ||
+        GalleryDLUnexpected(:final DownloadInfo downloadInfo) =>
           state.downloadInfos
               .map((info) => info.uid == downloadInfo.uid ? downloadInfo : info)
               .whereType<DownloadInfo>()
@@ -222,7 +222,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ),
       );
     });
-    on<GalleryDLLinkPressed>((event, emit) async {
+    on<GalleryDLURLPressed>((event, emit) async {
       (await _galleryDLRepository.launchGithubURL()).match((_) {}, (failure) {
         emit(
           state.copyWith(

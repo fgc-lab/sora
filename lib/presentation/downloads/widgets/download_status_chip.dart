@@ -3,8 +3,8 @@ import 'package:sora/domain/core/download_info.dart';
 import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/utils/palette.dart';
 
-class HomeDownloadStatus extends StatelessWidget {
-  const HomeDownloadStatus({required this.downloadInfo, this.size, super.key});
+class DownloadStatusChip extends StatelessWidget {
+  const DownloadStatusChip({required this.downloadInfo, this.size, super.key});
 
   final DownloadInfo? downloadInfo;
 

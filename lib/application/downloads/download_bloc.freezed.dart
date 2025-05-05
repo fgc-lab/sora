@@ -4,7 +4,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_bloc.dart';
+part of 'download_bloc.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,7 +13,7 @@ part of 'home_bloc.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$HomeEvent {
+mixin _$DownloadEvent {
 
 
 
@@ -21,7 +21,7 @@ mixin _$HomeEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeEvent);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadEvent);
 }
 
 
@@ -30,22 +30,22 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent()';
+  return 'DownloadEvent()';
 }
 
 
 }
 
 /// @nodoc
-class $HomeEventCopyWith<$Res>  {
-$HomeEventCopyWith(HomeEvent _, $Res Function(HomeEvent) __);
+class $DownloadEventCopyWith<$Res>  {
+$DownloadEventCopyWith(DownloadEvent _, $Res Function(DownloadEvent) __);
 }
 
 
 /// @nodoc
 
 
-class Init implements HomeEvent {
+class Init implements DownloadEvent {
   const Init();
   
 
@@ -65,7 +65,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent.init()';
+  return 'DownloadEvent.init()';
 }
 
 
@@ -77,7 +77,7 @@ String toString() {
 /// @nodoc
 
 
-class GalleryDLFound implements HomeEvent {
+class GalleryDLFound implements DownloadEvent {
   const GalleryDLFound();
   
 
@@ -97,7 +97,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent.galleryDLFound()';
+  return 'DownloadEvent.galleryDLFound()';
 }
 
 
@@ -109,7 +109,7 @@ String toString() {
 /// @nodoc
 
 
-class AddURLButtonPressed implements HomeEvent {
+class AddURLButtonPressed implements DownloadEvent {
   const AddURLButtonPressed();
   
 
@@ -129,7 +129,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent.addURLButtonPressed()';
+  return 'DownloadEvent.addURLButtonPressed()';
 }
 
 
@@ -141,14 +141,14 @@ String toString() {
 /// @nodoc
 
 
-class URLChanged implements HomeEvent {
+class URLChanged implements DownloadEvent {
   const URLChanged(this.uid, this.url);
   
 
  final  UniqueID uid;
  final  String url;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -167,14 +167,14 @@ int get hashCode => Object.hash(runtimeType,uid,url);
 
 @override
 String toString() {
-  return 'HomeEvent.urlChanged(uid: $uid, url: $url)';
+  return 'DownloadEvent.urlChanged(uid: $uid, url: $url)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $URLChangedCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+abstract mixin class $URLChangedCopyWith<$Res> implements $DownloadEventCopyWith<$Res> {
   factory $URLChangedCopyWith(URLChanged value, $Res Function(URLChanged) _then) = _$URLChangedCopyWithImpl;
 @useResult
 $Res call({
@@ -193,7 +193,7 @@ class _$URLChangedCopyWithImpl<$Res>
   final URLChanged _self;
   final $Res Function(URLChanged) _then;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? url = null,}) {
   return _then(URLChanged(
@@ -209,14 +209,14 @@ as String,
 /// @nodoc
 
 
-class FolderChanged implements HomeEvent {
+class FolderChanged implements DownloadEvent {
   const FolderChanged(this.uid, this.folder);
   
 
  final  UniqueID uid;
  final  String folder;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -235,14 +235,14 @@ int get hashCode => Object.hash(runtimeType,uid,folder);
 
 @override
 String toString() {
-  return 'HomeEvent.folderChanged(uid: $uid, folder: $folder)';
+  return 'DownloadEvent.folderChanged(uid: $uid, folder: $folder)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $FolderChangedCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+abstract mixin class $FolderChangedCopyWith<$Res> implements $DownloadEventCopyWith<$Res> {
   factory $FolderChangedCopyWith(FolderChanged value, $Res Function(FolderChanged) _then) = _$FolderChangedCopyWithImpl;
 @useResult
 $Res call({
@@ -261,7 +261,7 @@ class _$FolderChangedCopyWithImpl<$Res>
   final FolderChanged _self;
   final $Res Function(FolderChanged) _then;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? uid = null,Object? folder = null,}) {
   return _then(FolderChanged(
@@ -277,13 +277,13 @@ as String,
 /// @nodoc
 
 
-class SingleDownloadButtonPressed implements HomeEvent {
+class SingleDownloadButtonPressed implements DownloadEvent {
   const SingleDownloadButtonPressed(this.uid);
   
 
  final  UniqueID uid;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -302,14 +302,14 @@ int get hashCode => Object.hash(runtimeType,uid);
 
 @override
 String toString() {
-  return 'HomeEvent.singleDownloadButtonPressed(uid: $uid)';
+  return 'DownloadEvent.singleDownloadButtonPressed(uid: $uid)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $SingleDownloadButtonPressedCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+abstract mixin class $SingleDownloadButtonPressedCopyWith<$Res> implements $DownloadEventCopyWith<$Res> {
   factory $SingleDownloadButtonPressedCopyWith(SingleDownloadButtonPressed value, $Res Function(SingleDownloadButtonPressed) _then) = _$SingleDownloadButtonPressedCopyWithImpl;
 @useResult
 $Res call({
@@ -328,7 +328,7 @@ class _$SingleDownloadButtonPressedCopyWithImpl<$Res>
   final SingleDownloadButtonPressed _self;
   final $Res Function(SingleDownloadButtonPressed) _then;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? uid = null,}) {
   return _then(SingleDownloadButtonPressed(
@@ -343,7 +343,7 @@ as UniqueID,
 /// @nodoc
 
 
-class BatchDownloadButtonPressed implements HomeEvent {
+class BatchDownloadButtonPressed implements DownloadEvent {
   const BatchDownloadButtonPressed();
   
 
@@ -363,7 +363,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent.batchDownloadButtonPressed()';
+  return 'DownloadEvent.batchDownloadButtonPressed()';
 }
 
 
@@ -375,13 +375,13 @@ String toString() {
 /// @nodoc
 
 
-class ClearButtonPressed implements HomeEvent {
+class ClearButtonPressed implements DownloadEvent {
   const ClearButtonPressed(this.uid);
   
 
  final  UniqueID uid;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -400,14 +400,14 @@ int get hashCode => Object.hash(runtimeType,uid);
 
 @override
 String toString() {
-  return 'HomeEvent.clearButtonPressed(uid: $uid)';
+  return 'DownloadEvent.clearButtonPressed(uid: $uid)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ClearButtonPressedCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+abstract mixin class $ClearButtonPressedCopyWith<$Res> implements $DownloadEventCopyWith<$Res> {
   factory $ClearButtonPressedCopyWith(ClearButtonPressed value, $Res Function(ClearButtonPressed) _then) = _$ClearButtonPressedCopyWithImpl;
 @useResult
 $Res call({
@@ -426,7 +426,7 @@ class _$ClearButtonPressedCopyWithImpl<$Res>
   final ClearButtonPressed _self;
   final $Res Function(ClearButtonPressed) _then;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? uid = null,}) {
   return _then(ClearButtonPressed(
@@ -441,7 +441,7 @@ as UniqueID,
 /// @nodoc
 
 
-class BatchClearButtonPressed implements HomeEvent {
+class BatchClearButtonPressed implements DownloadEvent {
   const BatchClearButtonPressed();
   
 
@@ -461,7 +461,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent.batchClearButtonPressed()';
+  return 'DownloadEvent.batchClearButtonPressed()';
 }
 
 
@@ -473,13 +473,13 @@ String toString() {
 /// @nodoc
 
 
-class DownloadSucceeded implements HomeEvent {
+class DownloadSucceeded implements DownloadEvent {
   const DownloadSucceeded(this.downloadInfo);
   
 
  final  DownloadInfo downloadInfo;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -498,14 +498,14 @@ int get hashCode => Object.hash(runtimeType,downloadInfo);
 
 @override
 String toString() {
-  return 'HomeEvent.downloadSucceeded(downloadInfo: $downloadInfo)';
+  return 'DownloadEvent.downloadSucceeded(downloadInfo: $downloadInfo)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $DownloadSucceededCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+abstract mixin class $DownloadSucceededCopyWith<$Res> implements $DownloadEventCopyWith<$Res> {
   factory $DownloadSucceededCopyWith(DownloadSucceeded value, $Res Function(DownloadSucceeded) _then) = _$DownloadSucceededCopyWithImpl;
 @useResult
 $Res call({
@@ -524,7 +524,7 @@ class _$DownloadSucceededCopyWithImpl<$Res>
   final DownloadSucceeded _self;
   final $Res Function(DownloadSucceeded) _then;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
   return _then(DownloadSucceeded(
@@ -533,7 +533,7 @@ as DownloadInfo,
   ));
 }
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -548,13 +548,13 @@ $DownloadInfoCopyWith<$Res> get downloadInfo {
 /// @nodoc
 
 
-class DownloadFailed implements HomeEvent {
+class DownloadFailed implements DownloadEvent {
   const DownloadFailed(this.failure);
   
 
  final  GalleryDLFailure failure;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -573,14 +573,14 @@ int get hashCode => Object.hash(runtimeType,failure);
 
 @override
 String toString() {
-  return 'HomeEvent.downloadFailed(failure: $failure)';
+  return 'DownloadEvent.downloadFailed(failure: $failure)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $DownloadFailedCopyWith<$Res> implements $HomeEventCopyWith<$Res> {
+abstract mixin class $DownloadFailedCopyWith<$Res> implements $DownloadEventCopyWith<$Res> {
   factory $DownloadFailedCopyWith(DownloadFailed value, $Res Function(DownloadFailed) _then) = _$DownloadFailedCopyWithImpl;
 @useResult
 $Res call({
@@ -599,7 +599,7 @@ class _$DownloadFailedCopyWithImpl<$Res>
   final DownloadFailed _self;
   final $Res Function(DownloadFailed) _then;
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
   return _then(DownloadFailed(
@@ -608,7 +608,7 @@ as GalleryDLFailure,
   ));
 }
 
-/// Create a copy of HomeEvent
+/// Create a copy of DownloadEvent
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
@@ -623,7 +623,7 @@ $GalleryDLFailureCopyWith<$Res> get failure {
 /// @nodoc
 
 
-class GalleryDLLinkPressed implements HomeEvent {
+class GalleryDLLinkPressed implements DownloadEvent {
   const GalleryDLLinkPressed();
   
 
@@ -643,7 +643,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'HomeEvent.galleryDLLinkPressed()';
+  return 'DownloadEvent.galleryDLLinkPressed()';
 }
 
 
@@ -653,20 +653,20 @@ String toString() {
 
 
 /// @nodoc
-mixin _$HomeState {
+mixin _$DownloadState {
 
  Option<Result<Unit, CoreFailure>> get failureOrOption; List<DownloadInfo> get downloadInfos;
-/// Create a copy of HomeState
+/// Create a copy of DownloadState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$HomeStateCopyWith<HomeState> get copyWith => _$HomeStateCopyWithImpl<HomeState>(this as HomeState, _$identity);
+$DownloadStateCopyWith<DownloadState> get copyWith => _$DownloadStateCopyWithImpl<DownloadState>(this as DownloadState, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState&&(identical(other.failureOrOption, failureOrOption) || other.failureOrOption == failureOrOption)&&const DeepCollectionEquality().equals(other.downloadInfos, downloadInfos));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadState&&(identical(other.failureOrOption, failureOrOption) || other.failureOrOption == failureOrOption)&&const DeepCollectionEquality().equals(other.downloadInfos, downloadInfos));
 }
 
 
@@ -675,15 +675,15 @@ int get hashCode => Object.hash(runtimeType,failureOrOption,const DeepCollection
 
 @override
 String toString() {
-  return 'HomeState(failureOrOption: $failureOrOption, downloadInfos: $downloadInfos)';
+  return 'DownloadState(failureOrOption: $failureOrOption, downloadInfos: $downloadInfos)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $HomeStateCopyWith<$Res>  {
-  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) = _$HomeStateCopyWithImpl;
+abstract mixin class $DownloadStateCopyWith<$Res>  {
+  factory $DownloadStateCopyWith(DownloadState value, $Res Function(DownloadState) _then) = _$DownloadStateCopyWithImpl;
 @useResult
 $Res call({
  Option<Result<Unit, CoreFailure>> failureOrOption, List<DownloadInfo> downloadInfos
@@ -694,14 +694,14 @@ $Res call({
 
 }
 /// @nodoc
-class _$HomeStateCopyWithImpl<$Res>
-    implements $HomeStateCopyWith<$Res> {
-  _$HomeStateCopyWithImpl(this._self, this._then);
+class _$DownloadStateCopyWithImpl<$Res>
+    implements $DownloadStateCopyWith<$Res> {
+  _$DownloadStateCopyWithImpl(this._self, this._then);
 
-  final HomeState _self;
-  final $Res Function(HomeState) _then;
+  final DownloadState _self;
+  final $Res Function(DownloadState) _then;
 
-/// Create a copy of HomeState
+/// Create a copy of DownloadState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') @override $Res call({Object? failureOrOption = null,Object? downloadInfos = null,}) {
   return _then(_self.copyWith(
@@ -717,8 +717,8 @@ as List<DownloadInfo>,
 /// @nodoc
 
 
-class _HomeState implements HomeState {
-  const _HomeState({required this.failureOrOption, required final  List<DownloadInfo> downloadInfos}): _downloadInfos = downloadInfos;
+class _DownloadState implements DownloadState {
+  const _DownloadState({required this.failureOrOption, required final  List<DownloadInfo> downloadInfos}): _downloadInfos = downloadInfos;
   
 
 @override final  Option<Result<Unit, CoreFailure>> failureOrOption;
@@ -730,17 +730,17 @@ class _HomeState implements HomeState {
 }
 
 
-/// Create a copy of HomeState
+/// Create a copy of DownloadState
 /// with the given fields replaced by the non-null parameter values.
 @override @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$HomeStateCopyWith<_HomeState> get copyWith => __$HomeStateCopyWithImpl<_HomeState>(this, _$identity);
+_$DownloadStateCopyWith<_DownloadState> get copyWith => __$DownloadStateCopyWithImpl<_DownloadState>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomeState&&(identical(other.failureOrOption, failureOrOption) || other.failureOrOption == failureOrOption)&&const DeepCollectionEquality().equals(other._downloadInfos, _downloadInfos));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadState&&(identical(other.failureOrOption, failureOrOption) || other.failureOrOption == failureOrOption)&&const DeepCollectionEquality().equals(other._downloadInfos, _downloadInfos));
 }
 
 
@@ -749,15 +749,15 @@ int get hashCode => Object.hash(runtimeType,failureOrOption,const DeepCollection
 
 @override
 String toString() {
-  return 'HomeState(failureOrOption: $failureOrOption, downloadInfos: $downloadInfos)';
+  return 'DownloadState(failureOrOption: $failureOrOption, downloadInfos: $downloadInfos)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$HomeStateCopyWith<$Res> implements $HomeStateCopyWith<$Res> {
-  factory _$HomeStateCopyWith(_HomeState value, $Res Function(_HomeState) _then) = __$HomeStateCopyWithImpl;
+abstract mixin class _$DownloadStateCopyWith<$Res> implements $DownloadStateCopyWith<$Res> {
+  factory _$DownloadStateCopyWith(_DownloadState value, $Res Function(_DownloadState) _then) = __$DownloadStateCopyWithImpl;
 @override @useResult
 $Res call({
  Option<Result<Unit, CoreFailure>> failureOrOption, List<DownloadInfo> downloadInfos
@@ -768,17 +768,17 @@ $Res call({
 
 }
 /// @nodoc
-class __$HomeStateCopyWithImpl<$Res>
-    implements _$HomeStateCopyWith<$Res> {
-  __$HomeStateCopyWithImpl(this._self, this._then);
+class __$DownloadStateCopyWithImpl<$Res>
+    implements _$DownloadStateCopyWith<$Res> {
+  __$DownloadStateCopyWithImpl(this._self, this._then);
 
-  final _HomeState _self;
-  final $Res Function(_HomeState) _then;
+  final _DownloadState _self;
+  final $Res Function(_DownloadState) _then;
 
-/// Create a copy of HomeState
+/// Create a copy of DownloadState
 /// with the given fields replaced by the non-null parameter values.
 @override @pragma('vm:prefer-inline') $Res call({Object? failureOrOption = null,Object? downloadInfos = null,}) {
-  return _then(_HomeState(
+  return _then(_DownloadState(
 failureOrOption: null == failureOrOption ? _self.failureOrOption : failureOrOption // ignore: cast_nullable_to_non_nullable
 as Option<Result<Unit, CoreFailure>>,downloadInfos: null == downloadInfos ? _self._downloadInfos : downloadInfos // ignore: cast_nullable_to_non_nullable
 as List<DownloadInfo>,

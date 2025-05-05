@@ -38,6 +38,7 @@ dev_dependencies:
   auto_route_generator: ^10.0.1
   build_runner: ^2.4.15
   drift_dev: ^2.26.0
+  flutter_launcher_icons: ^0.14.3
   flutter_test:
     sdk: flutter
   freezed: ^3.0.6
@@ -45,6 +46,14 @@ dev_dependencies:
   slang_build_runner: ^4.7.0
   very_good_analysis: ^7.0.0
 
+flutter_launcher_icons:
+  linux:
+    generate: true
+    image_path: assets/images/sora_logo.png
+
 flutter:
 
   uses-material-design: true
+
+  assets:
+    - assets/images/

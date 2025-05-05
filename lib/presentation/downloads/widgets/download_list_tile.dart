@@ -3,11 +3,11 @@ import 'package:sora/domain/core/download_info.dart';
 import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
 import 'package:sora/presentation/core/default_text_field.dart';
-import 'package:sora/presentation/home/widgets/home_download_status.dart';
+import 'package:sora/presentation/downloads/widgets/download_status_chip.dart';
 import 'package:sora/utils/palette.dart';
 
-class HomeDownloadListTile extends StatelessWidget {
-  const HomeDownloadListTile({
+class DownloadListTile extends StatelessWidget {
+  const DownloadListTile({
     required this.downloadInfo,
     required this.folderValidator,
     required this.urlValidator,
@@ -44,7 +44,7 @@ class HomeDownloadListTile extends StatelessWidget {
       children: [
         Row(
           children: [
-            HomeDownloadStatus(downloadInfo: downloadInfo, size: 32),
+            DownloadStatusChip(downloadInfo: downloadInfo, size: 32),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),

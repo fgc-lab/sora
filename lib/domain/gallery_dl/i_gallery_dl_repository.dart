@@ -23,12 +23,14 @@ abstract class IGalleryDLRepository {
     DownloadInfo downloadInfo,
   );
 
-  Future<Result<int, GalleryDLFailure>> countHistoryItems();
+  Future<Result<int, GalleryDLFailure>> countArchivesItems();
 
-  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchHistory(
+  Future<Result<List<DownloadInfo>, GalleryDLFailure>> fetchArchives(
     int limit, {
     int? offset,
   });
 
-  Future<Result<Unit, GalleryDLFailure>> launchURL(DownloadInfo downloadInfo);
+  Future<Result<Unit, GalleryDLFailure>> launchContentURL(
+    DownloadInfo downloadInfo,
+  );
 }

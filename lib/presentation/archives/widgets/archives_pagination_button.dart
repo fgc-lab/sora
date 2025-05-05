@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:sora/utils/palette.dart';
 
-class HistoryPaginationButton extends StatelessWidget {
-  const HistoryPaginationButton({
+class ArchivesPaginationButton extends StatelessWidget {
+  const ArchivesPaginationButton({
     required this.title,
     required this.onPressed,
     super.key,
     this.color,
+    this.isCurrentPage = false,
   });
 
   final String title;
@@ -14,6 +15,8 @@ class HistoryPaginationButton extends StatelessWidget {
   final VoidCallback onPressed;
 
   final Color? color;
+
+  final bool isCurrentPage;
 
   @override
   Widget build(BuildContext context) {
@@ -29,11 +32,14 @@ class HistoryPaginationButton extends StatelessWidget {
         side: WidgetStateProperty.all<BorderSide>(
           const BorderSide(color: Palette.grey),
         ),
+        backgroundColor: WidgetStateProperty.all<Color>(
+          isCurrentPage ? Palette.black : Palette.white,
+        ),
       ),
       child: Text(
         title,
-        style: const TextStyle(
-          color: Palette.black,
+        style: TextStyle(
+          color: isCurrentPage ? Palette.white : Palette.black,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),

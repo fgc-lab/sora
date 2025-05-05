@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:sora/application/history/history_bloc.dart';
+import 'package:sora/application/archives/archives_bloc.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
-import 'package:sora/presentation/history/widgets/history_pagination_button.dart';
+import 'package:sora/presentation/archives/widgets/archives_pagination_button.dart';
 import 'package:sora/utils/pagination.dart';
 import 'package:sora/utils/palette.dart';
 
-class HistoryLayout extends StatelessWidget {
-  const HistoryLayout({super.key});
+class ArchivesLayout extends StatelessWidget {
+  const ArchivesLayout({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<HistoryBloc, HistoryState>(
+    return BlocListener<ArchivesBloc, ArchivesState>(
       listener: (context, state) {},
       child: Padding(
         padding: const EdgeInsets.only(right: 7.5, top: 7.5, bottom: 7.5),
@@ -24,10 +24,18 @@ class HistoryLayout extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                child: BlocBuilder<HistoryBloc, HistoryState>(
+                child: BlocBuilder<ArchivesBloc, ArchivesState>(
                   builder: (context, state) {
                     if (state.downloadInfos.isEmpty) {
-                      return const Center(child: Text('No history found!'));
+                      return const Center(
+                        child: Text(
+                          'No archives found!',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      );
                     }
 
                     return ListView.separated(
@@ -52,8 +60,8 @@ class HistoryLayout extends StatelessWidget {
                           trailing: DefaultIconButton(
                             icon: Icons.open_in_new_rounded,
                             onPressed:
-                                () => context.read<HistoryBloc>().add(
-                                  HistoryEvent.openInNewPressed(downloadInfo),
+                                () => context.read<ArchivesBloc>().add(
+                                  ArchivesEvent.openInNewPressed(downloadInfo),
                                 ),
                           ),
                         );
@@ -72,14 +80,14 @@ class HistoryLayout extends StatelessWidget {
                     horizontal: 20,
                     vertical: 10,
                   ),
-                  child: BlocBuilder<HistoryBloc, HistoryState>(
+                  child: BlocBuilder<ArchivesBloc, ArchivesState>(
                     builder: (context, state) {
                       if (state.itemsCount == 0) {
                         return Container();
                       }
 
                       final pages =
-                          state.itemsCount / Pagination.historyItemPerPage;
+                          state.itemsCount / Pagination.archiveItemPerPage;
 
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -91,7 +99,12 @@ class HistoryLayout extends StatelessWidget {
                               ),
                               child: DefaultIconButton(
                                 icon: Icons.arrow_back_ios_rounded,
-                                onPressed: () {},
+                                onPressed:
+                                    () => context.read<ArchivesBloc>().add(
+                                      ArchivesEvent.pagePressed(
+                                        state.paginationIdx - 1,
+                                      ),
+                                    ),
                               ),
                             ),
                           for (int i = 0; i < pages; i++)
@@ -99,13 +112,17 @@ class HistoryLayout extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 2.5,
                               ),
-                              child: HistoryPaginationButton(
+                              child: ArchivesPaginationButton(
                                 title: '${i + 1}',
-                                onPressed: () {},
+                                onPressed:
+                                    () => context.read<ArchivesBloc>().add(
+                                      ArchivesEvent.pagePressed(i),
+                                    ),
                                 color:
                                     i + 1 == state.paginationIdx
                                         ? Palette.black
                                         : Palette.white,
+                                isCurrentPage: i == state.paginationIdx,
                               ),
                             ),
                           if (pages > 1)
@@ -115,7 +132,12 @@ class HistoryLayout extends StatelessWidget {
                               ),
                               child: DefaultIconButton(
                                 icon: Icons.arrow_forward_ios_rounded,
-                                onPressed: () {},
+                                onPressed:
+                                    () => context.read<ArchivesBloc>().add(
+                                      ArchivesEvent.pagePressed(
+                                        state.paginationIdx + 1,
+                                      ),
+                                    ),
                               ),
                             ),
                         ],
