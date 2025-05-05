@@ -1,16 +1,27 @@
-# sora
+<p align="center">
+ <img width=200px height=200px src="assets/images/sora_logo.png"/>
+</p>
 
-A new Flutter project.
+<h1 align="center"> Sora </h1>
 
-## Getting Started
+<div align="center">
 
-This project is a starting point for a Flutter application.
+[![GitHub downloads](https://img.shields.io/github/downloads/SSebigo/sora/total?label=downloads&labelColor=27303D&color=0D1117&logo=github&logoColor=FFFFFF&style=flat)](https://github.com/SSebigo/sora/releases)
+![star](https://img.shields.io/github/stars/SSebigo/sora)
 
-A few resources to get you started if this is your first Flutter project:
+Sora is an open-source GUI for [gallery-dl](https://github.com/mikf/gallery-dl).
+</div>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Features
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<div align="left">
+
+Features include:
+* Download content using [gallery-dl](https://github.com/mikf/gallery-dl).
+* History of downloaded content.
+
+</div>
+
+## Download
+
+Get the app from our [releases page](https://github.com/SSebigo/sora/releases).
