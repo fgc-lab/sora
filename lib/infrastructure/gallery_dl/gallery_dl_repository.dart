@@ -150,7 +150,11 @@ class GalleryDLRepository implements IGalleryDLRepository {
     DownloadInfo downloadInfo,
   ) async {
     try {
-      final url = downloadInfo.url.getOrCrash();
+      final url = downloadInfo.url.getOrNull();
+
+      if (url == null) {
+        return Err(GalleryDLFailure.invalidURL(downloadInfo));
+      }
 
       final result =
           await (_drift.select(_drift.driftDownloadInfo)

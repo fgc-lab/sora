@@ -74,15 +74,13 @@ class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
         (await _galleryDLRepository.checkForDuplicate(downloadInfo)).match(
           (_) {},
           (failure) {
-            final newDownloadInfos = switch (failure) {
+            newDownloadInfos = switch (failure) {
               GalleryDLContentAlreadyDownloaded(:final downloadInfo) =>
                 state.downloadInfos
                     .map((info) => info.uid == event.uid ? downloadInfo : info)
                     .toList(),
-              _ => state.downloadInfos,
+              _ => newDownloadInfos,
             };
-
-            emit(state.copyWith(downloadInfos: newDownloadInfos));
           },
         );
       }

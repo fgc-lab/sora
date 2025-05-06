@@ -9,7 +9,7 @@ import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/presentation/core/default_button.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
 import 'package:sora/presentation/downloads/widgets/downloads_gallery_dl_not_found_dialog.dart';
-import 'package:sora/presentation/downloads/widgets/download_list_tile.dart';
+import 'package:sora/presentation/downloads/widgets/downloads_list_tile.dart';
 
 class DownloadsLayout extends StatefulWidget {
   const DownloadsLayout({super.key});
@@ -215,7 +215,7 @@ class _DownloadsLayoutState extends State<DownloadsLayout> {
                                     ?.value
                                     .match((_) => null, (err) {
                                       final result = switch (err) {
-                                        ValueFailure.empty =>
+                                        ValueEmpty() =>
                                           'Folder cannot be empty',
                                         _ => null,
                                       };
@@ -231,11 +231,8 @@ class _DownloadsLayoutState extends State<DownloadsLayout> {
                                     .value
                                     .match((_) => null, (err) {
                                       final result = switch (err) {
-                                        ValueFailure.invalidURL =>
-                                          'Invalid URL',
-                                        ValueFailure.empty =>
-                                          'URL cannot be empty',
-                                        _ => null,
+                                        ValueInvalidURL() => 'Invalid URL',
+                                        ValueEmpty() => 'URL cannot be empty',
                                       };
 
                                       return result;

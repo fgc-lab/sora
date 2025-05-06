@@ -3,7 +3,7 @@ import 'package:sora/domain/core/download_info.dart';
 import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/presentation/core/default_icon_button.dart';
 import 'package:sora/presentation/core/default_text_field.dart';
-import 'package:sora/presentation/downloads/widgets/download_status_chip.dart';
+import 'package:sora/presentation/downloads/widgets/downloads_status_chip.dart';
 import 'package:sora/utils/palette.dart';
 
 class DownloadListTile extends StatelessWidget {
@@ -44,18 +44,32 @@ class DownloadListTile extends StatelessWidget {
       children: [
         Row(
           children: [
-            DownloadStatusChip(downloadInfo: downloadInfo, size: 32),
+            Column(
+              children: [
+                DownloadStatusChip(downloadInfo: downloadInfo, size: 32),
+              ],
+            ),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: DefaultTextField(
-                  disabled:
-                      downloadInfo.status == DownloadStatus.downloading ||
-                      downloadInfo.status == DownloadStatus.success,
-                  hintText: 'folder-name',
-                  controller: folderController,
-                  onChanged: onFolderChanged,
-                  validator: folderValidator,
+                child: Tooltip(
+                  message: 'Optional folder name.',
+                  verticalOffset: 30,
+                  padding: const EdgeInsets.all(10),
+                  textStyle: const TextStyle(
+                    color: Palette.white,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
+                  child: DefaultTextField(
+                    disabled:
+                        downloadInfo.status == DownloadStatus.downloading ||
+                        downloadInfo.status == DownloadStatus.success,
+                    hintText: 'folder-name',
+                    controller: folderController,
+                    onChanged: onFolderChanged,
+                    validator: folderValidator,
+                  ),
                 ),
               ),
             ),
@@ -93,7 +107,12 @@ class DownloadListTile extends StatelessWidget {
             padding: EdgeInsets.only(top: 10),
             child: Text(
               'This URL seems to have already been used before!',
-              style: TextStyle(color: Palette.error, letterSpacing: 1.1),
+              style: TextStyle(
+                color: Palette.error,
+                letterSpacing: 1.1,
+                fontSize: 14,
+                fontWeight: FontWeight.w700,
+              ),
             ),
           ),
       ],
