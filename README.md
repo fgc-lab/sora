@@ -25,3 +25,9 @@ Features include:
 ## Download
 
 Get the app from our [releases page](https://github.com/SSebigo/sora/releases).
+
+## Screenshots
+
+![sora downloads page screenshot](screenshots/sora_downloads.png)
+
+![sora archives page screenshot](screenshots/sora_archives.png)
