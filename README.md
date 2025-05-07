@@ -2,7 +2,7 @@
  <img width=200px height=200px src="assets/images/sora_logo.png"/>
 </p>
 
-<h1 align="center">Sora</h1>
+<h1 align="center"> Sora </h1>
 
 <div align="center">
 
