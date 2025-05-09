@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sora/application/downloads/downloads_bloc.dart';
@@ -70,9 +71,12 @@ class _DownloadsLayoutState extends State<DownloadsLayout> {
                                     const DownloadsEvent.galleryDLURLPressed(),
                                   ),
                               onRestartPressed:
-                                  () => context.read<DownloadsBloc>().add(
-                                    const DownloadsEvent.init(),
-                                  ),
+                                  () =>
+                                      context
+                                        ..router.root.maybePop()
+                                        ..read<HomeBloc>().add(
+                                          const HomeEvent.init(),
+                                        ),
                             ),
                           ),
                     ),

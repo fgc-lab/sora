@@ -22,6 +22,12 @@ part 'downloads_state.dart';
 class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
   DownloadsBloc(this._galleryDLRepository) : super(DownloadsState.initial()) {
     on<Init>((event, emit) async {
+      emit(
+        state.copyWith(
+          failureOrOption: const None(),
+        ),
+      );
+
       (await _galleryDLRepository.checkGalleryDLInstallation()).match(
         (_) {
           add(const DownloadsEvent.galleryDLFound());
