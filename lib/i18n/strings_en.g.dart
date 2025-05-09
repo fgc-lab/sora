@@ -51,6 +51,7 @@ class TranslationsDashboardEn {
 	// Translations
 	String get downloads => 'Downloads';
 	String get archives => 'Archives';
+	String get settings => 'Settings';
 }
 
 /// Flat map(s) containing all translations.
@@ -60,6 +61,7 @@ extension on Translations {
 		switch (path) {
 			case 'dashboard.downloads': return 'Downloads';
 			case 'dashboard.archives': return 'Archives';
+			case 'dashboard.settings': return 'Settings';
 			default: return null;
 		}
 	}

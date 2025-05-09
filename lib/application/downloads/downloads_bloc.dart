@@ -22,11 +22,7 @@ part 'downloads_state.dart';
 class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
   DownloadsBloc(this._galleryDLRepository) : super(DownloadsState.initial()) {
     on<Init>((event, emit) async {
-      emit(
-        state.copyWith(
-          failureOrOption: const None(),
-        ),
-      );
+      emit(state.copyWith(failureOrOption: const None()));
 
       (await _galleryDLRepository.checkGalleryDLInstallation()).match(
         (_) {
@@ -41,7 +37,7 @@ class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
         },
       );
     });
-    on<GalleryDLFound>((event, emit) {
+    on<_GalleryDLFound>((event, emit) {
       final downloadInfo = DownloadInfo.empty().copyWith(
         status: DownloadStatus.pending,
       );
@@ -191,7 +187,7 @@ class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
 
       add(const DownloadsEvent.init());
     });
-    on<DownloadSucceeded>((event, emit) async {
+    on<_DownloadSucceeded>((event, emit) async {
       final newDownloadInfos =
           state.downloadInfos
               .map(
@@ -208,7 +204,7 @@ class DownloadsBloc extends Bloc<DownloadsEvent, DownloadsState> {
         event.downloadInfo,
       )).match((_) {}, (failure) {});
     });
-    on<DownloadFailed>((event, emit) {
+    on<_DownloadFailed>((event, emit) {
       final newDownloadInfos = switch (event.failure) {
         GalleryDLInvalidURL(:final DownloadInfo downloadInfo) ||
         GalleryDLUnexpected(:final DownloadInfo downloadInfo) =>

@@ -62,17 +62,3 @@ extension DownloadInfoDTOX on DownloadInfoDTO {
     'updatedAt': updatedAt,
   };
 }
-
-extension DownloadInfoMapX on Map<dynamic, dynamic> {
-  DownloadInfo toDomain() => DownloadInfo(
-    uid: UniqueID.fromUniqueString(this['uid'] as String),
-    url: URL(this['url'] as String),
-    folder:
-        this['folder'] != null
-            ? NonEmptyString(this['folder'] as String)
-            : null,
-    updatedAt: this['updatedAt'] as DateTime,
-    status: DownloadStatus.unknown,
-    isDuplicate: false,
-  );
-}

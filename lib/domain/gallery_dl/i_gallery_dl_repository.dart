@@ -1,6 +1,8 @@
 import 'package:oxidized/oxidized.dart';
 import 'package:sora/domain/core/download_info.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
+import 'package:sora/domain/settings/settings.dart';
+import 'package:sora/domain/settings/settings_failure.dart';
 
 abstract class IGalleryDLRepository {
   Future<Result<Unit, GalleryDLFailure>> checkGalleryDLInstallation();
@@ -33,4 +35,6 @@ abstract class IGalleryDLRepository {
   Future<Result<Unit, GalleryDLFailure>> launchContentURL(
     DownloadInfo downloadInfo,
   );
+
+  Future<Result<Settings, GalleryDLFailure>> fetchConfig(Settings settings);
 }

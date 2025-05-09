@@ -21,7 +21,7 @@ class ArchivesBloc extends Bloc<ArchivesEvent, ArchivesState> {
         add(const ArchivesEvent.itemsCounted());
       }, (failure) {});
     });
-    on<ItemsCounted>((event, emit) async {
+    on<_ItemsCounted>((event, emit) async {
       final offset =
           state.paginationIdx == 0
               ? null

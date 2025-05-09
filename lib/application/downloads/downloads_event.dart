@@ -4,7 +4,7 @@ part of 'downloads_bloc.dart';
 class DownloadsEvent with _$DownloadsEvent {
   const factory DownloadsEvent.init() = Init;
 
-  const factory DownloadsEvent.galleryDLFound() = GalleryDLFound;
+  const factory DownloadsEvent.galleryDLFound() = _GalleryDLFound;
 
   const factory DownloadsEvent.addURLButtonPressed() = AddURLButtonPressed;
 
@@ -27,10 +27,10 @@ class DownloadsEvent with _$DownloadsEvent {
       BatchClearButtonPressed;
 
   const factory DownloadsEvent.downloadSucceeded(DownloadInfo downloadInfo) =
-      DownloadSucceeded;
+      _DownloadSucceeded;
 
   const factory DownloadsEvent.downloadFailed(GalleryDLFailure failure) =
-      DownloadFailed;
+      _DownloadFailed;
 
   const factory DownloadsEvent.galleryDLURLPressed() = GalleryDLURLPressed;
 }

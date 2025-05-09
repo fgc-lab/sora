@@ -55,7 +55,8 @@ class _DownloadsLayoutState extends State<DownloadsLayout> {
                 ok: (_) {},
                 err: (err) {
                   final failure = switch (err) {
-                    GalleryDL(:final GalleryDLFailure f) => f,
+                    CoreGalleryDL(:final GalleryDLFailure f) => f,
+                    _ => null,
                   };
 
                   final _ = switch (failure) {
@@ -74,8 +75,8 @@ class _DownloadsLayoutState extends State<DownloadsLayout> {
                                   () =>
                                       context
                                         ..router.root.maybePop()
-                                        ..read<HomeBloc>().add(
-                                          const HomeEvent.init(),
+                                        ..read<DownloadsBloc>().add(
+                                          const DownloadsEvent.init(),
                                         ),
                             ),
                           ),

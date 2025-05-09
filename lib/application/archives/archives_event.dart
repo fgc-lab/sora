@@ -4,7 +4,7 @@ part of 'archives_bloc.dart';
 class ArchivesEvent with _$ArchivesEvent {
   const factory ArchivesEvent.init() = Init;
 
-  const factory ArchivesEvent.itemsCounted() = ItemsCounted;
+  const factory ArchivesEvent.itemsCounted() = _ItemsCounted;
 
   const factory ArchivesEvent.openInNewPressed(DownloadInfo downloadInfo) =
       OpenInNewPressed;

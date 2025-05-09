@@ -48,6 +48,7 @@ class _TranslationsDashboardFr implements TranslationsDashboardEn {
 	// Translations
 	@override String get downloads => 'Téléchargements';
 	@override String get archives => 'Archives';
+	@override String get settings => 'Paramètres';
 }
 
 /// Flat map(s) containing all translations.
@@ -57,6 +58,7 @@ extension on TranslationsFr {
 		switch (path) {
 			case 'dashboard.downloads': return 'Téléchargements';
 			case 'dashboard.archives': return 'Archives';
+			case 'dashboard.settings': return 'Paramètres';
 			default: return null;
 		}
 	}

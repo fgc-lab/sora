@@ -184,6 +184,38 @@ $DownloadInfoCopyWith<$Res> get downloadInfo {
 /// @nodoc
 
 
+class GalleryDLContentURLFailedToOpen implements GalleryDLFailure {
+  const GalleryDLContentURLFailedToOpen();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLContentURLFailedToOpen);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'GalleryDLFailure.contentURLFailedToOpen()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
 class GalleryDLInvalidURL implements GalleryDLFailure {
   const GalleryDLInvalidURL(this.downloadInfo);
   
@@ -255,6 +287,38 @@ $DownloadInfoCopyWith<$Res> get downloadInfo {
   });
 }
 }
+
+/// @nodoc
+
+
+class GalleryDLConfigNotFound implements GalleryDLFailure {
+  const GalleryDLConfigNotFound();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLConfigNotFound);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'GalleryDLFailure.configNotFound()';
+}
+
+
+}
+
+
+
 
 /// @nodoc
 
@@ -333,37 +397,5 @@ $DownloadInfoCopyWith<$Res>? get downloadInfo {
   });
 }
 }
-
-/// @nodoc
-
-
-class GalleryDLContentURLFailedToOpen implements GalleryDLFailure {
-  const GalleryDLContentURLFailedToOpen();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLContentURLFailedToOpen);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'GalleryDLFailure.contentURLFailedToOpen()';
-}
-
-
-}
-
-
-
 
 // dart format on

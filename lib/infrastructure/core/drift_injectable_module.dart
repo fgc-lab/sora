@@ -4,10 +4,11 @@ import 'package:injectable/injectable.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:sora/infrastructure/core/drift_download_info.dart';
+import 'package:sora/infrastructure/settings/drift_settings.dart';
 
 part 'drift_injectable_module.g.dart';
 
-@DriftDatabase(tables: [DriftDownloadInfo])
+@DriftDatabase(tables: [DriftDownloadInfo, DriftSettings])
 class DriftSoraDatabase extends _$DriftSoraDatabase {
   DriftSoraDatabase([QueryExecutor? executor])
     : super(executor ?? _openConnection());

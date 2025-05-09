@@ -77,8 +77,8 @@ String toString() {
 /// @nodoc
 
 
-class GalleryDLFound implements DownloadsEvent {
-  const GalleryDLFound();
+class _GalleryDLFound implements DownloadsEvent {
+  const _GalleryDLFound();
   
 
 
@@ -88,7 +88,7 @@ class GalleryDLFound implements DownloadsEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GalleryDLFound);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GalleryDLFound);
 }
 
 
@@ -473,8 +473,8 @@ String toString() {
 /// @nodoc
 
 
-class DownloadSucceeded implements DownloadsEvent {
-  const DownloadSucceeded(this.downloadInfo);
+class _DownloadSucceeded implements DownloadsEvent {
+  const _DownloadSucceeded(this.downloadInfo);
   
 
  final  DownloadInfo downloadInfo;
@@ -483,13 +483,13 @@ class DownloadSucceeded implements DownloadsEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$DownloadSucceededCopyWith<DownloadSucceeded> get copyWith => _$DownloadSucceededCopyWithImpl<DownloadSucceeded>(this, _$identity);
+_$DownloadSucceededCopyWith<_DownloadSucceeded> get copyWith => __$DownloadSucceededCopyWithImpl<_DownloadSucceeded>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadSucceeded&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadSucceeded&&(identical(other.downloadInfo, downloadInfo) || other.downloadInfo == downloadInfo));
 }
 
 
@@ -505,8 +505,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $DownloadSucceededCopyWith<$Res> implements $DownloadsEventCopyWith<$Res> {
-  factory $DownloadSucceededCopyWith(DownloadSucceeded value, $Res Function(DownloadSucceeded) _then) = _$DownloadSucceededCopyWithImpl;
+abstract mixin class _$DownloadSucceededCopyWith<$Res> implements $DownloadsEventCopyWith<$Res> {
+  factory _$DownloadSucceededCopyWith(_DownloadSucceeded value, $Res Function(_DownloadSucceeded) _then) = __$DownloadSucceededCopyWithImpl;
 @useResult
 $Res call({
  DownloadInfo downloadInfo
@@ -517,17 +517,17 @@ $DownloadInfoCopyWith<$Res> get downloadInfo;
 
 }
 /// @nodoc
-class _$DownloadSucceededCopyWithImpl<$Res>
-    implements $DownloadSucceededCopyWith<$Res> {
-  _$DownloadSucceededCopyWithImpl(this._self, this._then);
+class __$DownloadSucceededCopyWithImpl<$Res>
+    implements _$DownloadSucceededCopyWith<$Res> {
+  __$DownloadSucceededCopyWithImpl(this._self, this._then);
 
-  final DownloadSucceeded _self;
-  final $Res Function(DownloadSucceeded) _then;
+  final _DownloadSucceeded _self;
+  final $Res Function(_DownloadSucceeded) _then;
 
 /// Create a copy of DownloadsEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? downloadInfo = null,}) {
-  return _then(DownloadSucceeded(
+  return _then(_DownloadSucceeded(
 null == downloadInfo ? _self.downloadInfo : downloadInfo // ignore: cast_nullable_to_non_nullable
 as DownloadInfo,
   ));
@@ -548,8 +548,8 @@ $DownloadInfoCopyWith<$Res> get downloadInfo {
 /// @nodoc
 
 
-class DownloadFailed implements DownloadsEvent {
-  const DownloadFailed(this.failure);
+class _DownloadFailed implements DownloadsEvent {
+  const _DownloadFailed(this.failure);
   
 
  final  GalleryDLFailure failure;
@@ -558,13 +558,13 @@ class DownloadFailed implements DownloadsEvent {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$DownloadFailedCopyWith<DownloadFailed> get copyWith => _$DownloadFailedCopyWithImpl<DownloadFailed>(this, _$identity);
+_$DownloadFailedCopyWith<_DownloadFailed> get copyWith => __$DownloadFailedCopyWithImpl<_DownloadFailed>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DownloadFailed&&(identical(other.failure, failure) || other.failure == failure));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DownloadFailed&&(identical(other.failure, failure) || other.failure == failure));
 }
 
 
@@ -580,8 +580,8 @@ String toString() {
 }
 
 /// @nodoc
-abstract mixin class $DownloadFailedCopyWith<$Res> implements $DownloadsEventCopyWith<$Res> {
-  factory $DownloadFailedCopyWith(DownloadFailed value, $Res Function(DownloadFailed) _then) = _$DownloadFailedCopyWithImpl;
+abstract mixin class _$DownloadFailedCopyWith<$Res> implements $DownloadsEventCopyWith<$Res> {
+  factory _$DownloadFailedCopyWith(_DownloadFailed value, $Res Function(_DownloadFailed) _then) = __$DownloadFailedCopyWithImpl;
 @useResult
 $Res call({
  GalleryDLFailure failure
@@ -592,17 +592,17 @@ $GalleryDLFailureCopyWith<$Res> get failure;
 
 }
 /// @nodoc
-class _$DownloadFailedCopyWithImpl<$Res>
-    implements $DownloadFailedCopyWith<$Res> {
-  _$DownloadFailedCopyWithImpl(this._self, this._then);
+class __$DownloadFailedCopyWithImpl<$Res>
+    implements _$DownloadFailedCopyWith<$Res> {
+  __$DownloadFailedCopyWithImpl(this._self, this._then);
 
-  final DownloadFailed _self;
-  final $Res Function(DownloadFailed) _then;
+  final _DownloadFailed _self;
+  final $Res Function(_DownloadFailed) _then;
 
 /// Create a copy of DownloadsEvent
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? failure = null,}) {
-  return _then(DownloadFailed(
+  return _then(_DownloadFailed(
 null == failure ? _self.failure : failure // ignore: cast_nullable_to_non_nullable
 as GalleryDLFailure,
   ));

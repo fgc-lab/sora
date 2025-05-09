@@ -77,8 +77,8 @@ String toString() {
 /// @nodoc
 
 
-class ItemsCounted implements ArchivesEvent {
-  const ItemsCounted();
+class _ItemsCounted implements ArchivesEvent {
+  const _ItemsCounted();
   
 
 
@@ -88,7 +88,7 @@ class ItemsCounted implements ArchivesEvent {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ItemsCounted);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ItemsCounted);
 }
 
 

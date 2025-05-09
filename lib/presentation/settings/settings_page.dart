@@ -1,5 +1,10 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:sora/application/settings/settings_bloc.dart';
+import 'package:sora/injection.dart';
+import 'package:sora/presentation/settings/settings_layout.dart';
+import 'package:sora/utils/palette.dart';
 
 @RoutePage()
 class SettingsPage extends StatelessWidget {
@@ -7,6 +12,13 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Settings Page'));
+    return Scaffold(
+      backgroundColor: Palette.white,
+      body: BlocProvider(
+        create:
+            (context) => getIt<SettingsBloc>()..add(const SettingsEvent.init()),
+        child: const SafeArea(child: SettingsLayout()),
+      ),
+    );
   }
 }

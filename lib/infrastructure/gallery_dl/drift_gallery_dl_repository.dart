@@ -10,14 +10,16 @@ import 'package:sora/domain/core/download_status.dart';
 import 'package:sora/domain/core/non_empty_string.dart';
 import 'package:sora/domain/gallery_dl/gallery_dl_failure.dart';
 import 'package:sora/domain/gallery_dl/i_gallery_dl_repository.dart';
+import 'package:sora/domain/settings/settings.dart';
 import 'package:sora/infrastructure/core/download_info_dto.dart';
 import 'package:sora/infrastructure/core/drift_injectable_module.dart';
+import 'package:sora/utils/paths.dart';
 import 'package:sora/utils/urls.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 @LazySingleton(as: IGalleryDLRepository)
-class GalleryDLRepository implements IGalleryDLRepository {
-  GalleryDLRepository(this._drift);
+class DriftGalleryDLRepository implements IGalleryDLRepository {
+  DriftGalleryDLRepository(this._drift);
 
   final DriftSoraDatabase _drift;
 
@@ -135,7 +137,7 @@ class GalleryDLRepository implements IGalleryDLRepository {
             DriftDownloadInfoCompanion.insert(
               url: url,
               folder: Value(folder),
-              updatedAt: Value(DateTime.now()),
+              updatedAt: Value(downloadInfo.updatedAt ?? DateTime.now()),
             ),
           );
 
@@ -226,6 +228,27 @@ class GalleryDLRepository implements IGalleryDLRepository {
           ),
         ),
       );
+    }
+  }
+
+  @override
+  Future<Result<Settings, GalleryDLFailure>> fetchConfig(
+    Settings settings,
+  ) async {
+    try {
+      final configPaths = switch (Platform.operatingSystem) {
+        'linux' || 'macos' => Paths.galleryDLOtherConfigPaths,
+        'windows' => Paths.galleryDLWindowsConfigPaths,
+        _ => <String>[],
+      };
+
+      if (configPaths.isEmpty) {
+        return const Err(GalleryDLFailure.unexpected());
+      }
+
+      return Ok(settings);
+    } on Exception catch (_) {
+      return const Err(GalleryDLFailure.configNotFound());
     }
   }
 }

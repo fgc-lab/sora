@@ -14,12 +14,14 @@ sealed class GalleryDLFailure with _$GalleryDLFailure {
     DownloadInfo downloadInfo,
   ) = GalleryDLContentAlreadyDownloaded;
 
+  const factory GalleryDLFailure.contentURLFailedToOpen() =
+      GalleryDLContentURLFailedToOpen;
+
   const factory GalleryDLFailure.invalidURL(DownloadInfo downloadInfo) =
       GalleryDLInvalidURL;
 
+  const factory GalleryDLFailure.configNotFound() = GalleryDLConfigNotFound;
+
   const factory GalleryDLFailure.unexpected({DownloadInfo? downloadInfo}) =
       GalleryDLUnexpected;
-
-  const factory GalleryDLFailure.contentURLFailedToOpen() =
-      GalleryDLContentURLFailedToOpen;
 }
